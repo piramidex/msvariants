@@ -1,0 +1,494 @@
+<div style="display: block;" id="product_variants" class="tab_content">
+
+			<input name="options_form" type="hidden" value="1">
+			<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				jQuery(document).on("click", "#addAttributes", function(event) {
+					$(this).parent().parent().hide();
+					if ($('#add_attributes_holder>td').html() !='' && $('#add_attributes_holder>td').html() !='&nbsp;') {
+						return false;
+					}
+					var new_attributes_html='';
+					new_attributes_html+='<span class="new_product_attributes">Add new product attributes</span><div class="wrap-attributes-item" rel="new">';
+					new_attributes_html+='<table>';
+					new_attributes_html+='<tr class="option_row">';
+
+					new_attributes_html+='<td class="product_attribute_option">';
+					new_attributes_html+='<input type="hidden" name="tx_multishop_pi1[options][]" id="tmp_options_sb" style="width:200px" />';
+					new_attributes_html+='<input type="hidden" name="tx_multishop_pi1[is_manual_options][]" value="0" />';
+					new_attributes_html+='<input type="hidden" name="tx_multishop_pi1[pa_id][]" value="0" />';
+					new_attributes_html+='</td>';
+
+					new_attributes_html+='<td class="product_attribute_value">';
+					new_attributes_html+='<input type="hidden" name="tx_multishop_pi1[attributes][]" id="tmp_attributes_sb" style="width:200px" />';
+					new_attributes_html+='<input type="hidden" name="tx_multishop_pi1[is_manual_attributes][]" value="0" />';
+					new_attributes_html+='</td>';
+
+					new_attributes_html+='<td class="product_attribute_prefix">';
+					new_attributes_html+='<select name="tx_multishop_pi1[prefix][]">';
+					new_attributes_html+='<option value="">&nbsp;</option>';
+					new_attributes_html+='<option value="+" selected="selected">+</option>';
+					new_attributes_html+='<option value="-">-</option>';
+					new_attributes_html+='</select>';
+					new_attributes_html+='</td>';
+
+					new_attributes_html+='<td class="product_attribute_price">';
+					new_attributes_html+='<div class="msAttributesField">';
+					new_attributes_html+='Bs <input type="text" name="display_name" id="display_name" class="msAttributesPriceExcludingVat">';
+					new_attributes_html+='<label for="display_name">sin impuestos (I.G.I.C)</label>';
+					new_attributes_html+='</div>';
+					new_attributes_html+='<div class="msAttributesField">';
+					new_attributes_html+='Bs <input type="text" name="display_name" id="display_name" class="msAttributesPriceIncludingVat">';
+					new_attributes_html+='<label for="display_name">Incl. VAT</label>';
+					new_attributes_html+='</div>';
+					new_attributes_html+='<div class="msAttributesField hidden">';
+					new_attributes_html+='<input type="hidden" name="tx_multishop_pi1[price][]" />';
+					new_attributes_html+='</div>';
+					new_attributes_html+='</td>';
+
+					new_attributes_html+='<td>';
+					new_attributes_html+='<input type="button" value="save" class="msadmin_button save_new_attributes">&nbsp;<input type="button" value="cancel" class="msadmin_button delete_tmp_product_attributes">';
+					new_attributes_html+='</td>';
+					new_attributes_html+='</tr>';
+
+					new_attributes_html+='</table>';
+					new_attributes_html+='</div>';
+					$('#add_attributes_holder>td').html(new_attributes_html);
+					// init selec2
+					select2_sb("#tmp_options_sb", "choose option", "new_product_attribute_options_dropdown", "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=get_attributes_options");
+					select2_values_sb("#tmp_attributes_sb", "choose attribute", "new_product_attribute_values_dropdown", "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=get_attributes_values");
+					event.preventDefault();
+				});
+				jQuery(document).on("click", ".add_new_attributes_values", function(event) {
+					var option_id=$(this).attr("rel");
+					var d = new Date();
+					var n = d.getTime();
+					var new_option_cn="product_attribute_options" + n;
+					var new_value_cn="product_attribute_values" + n;
+					// cloned the first row of the option group
+					var element_cloned=$($(this).parent().prev()).children().first().clone();
+					// give the cloned row proper background color
+					if ($($(this).parent().prev()).children().last().hasClass("odd_item_row")) {
+						$(element_cloned).removeClass("odd_item_row").addClass("new_attributes even_item_row");
+					} else {
+						$(element_cloned).removeClass("even_item_row").addClass("new_attributes odd_item_row");
+					}
+					$(element_cloned).removeAttr("id");
+					$(element_cloned).attr("rel", "new");
+					// cleaned up the cloned value
+					$(element_cloned).find("td.product_attribute_option>div").remove();
+					$(element_cloned).find("td.product_attribute_value>div").remove();
+					$(element_cloned).find("input[class^='product_attribute_options']").attr("class", function(i, c){
+						var classes_name=c.split(" ");
+						var class_name="";
+						$.each(classes_name, function(i, x){
+							if (x.indexOf("product_attribute_options")!==-1) {
+								class_name=x;
+							}
+						});
+						$(this).removeClass(class_name).addClass(new_option_cn);
+						// clear the pa_id
+						$(this).next().next().val("");
+					});
+					$(element_cloned).find("input[class^='product_attribute_values']").attr("class", function(i, c){
+						var classes_name=c.split(" ");
+						var class_name="";
+						$.each(classes_name, function(i, x){
+							if (x.indexOf("product_attribute_values")!==-1) {
+								class_name=x;
+							}
+						});
+						$(this).removeClass(class_name).addClass(new_value_cn);
+						$(this).removeAttr("id");
+						$(this).val("");
+						$(this).next().removeAttr("id");
+						$(this).next().val("");
+					});
+					$(element_cloned).find("div.product_attribute_prefix>select").val("+");
+					$(element_cloned).find("div.msAttributesField>input").val("0.00");
+					// add new shiny cloned attributes row
+					$($(this).parent().prev()).append(element_cloned);
+					// init selec2
+					select2_sb(".product_attribute_options" + n, "choose option", "new_product_attribute_options_dropdown", "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=get_attributes_options");
+					select2_values_sb(".product_attribute_values" + n, "choose attribute", "new_product_attribute_values_dropdown", "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=get_attributes_values");
+					event.preventDefault();
+				});
+				jQuery(document).on("click", ".save_new_attributes", function(){
+					var pa_main_divwrapper=$(this).parent().parent().parent().parent().parent();
+					var pa_option_sb=$("#tmp_options_sb").select2("data");
+					var pa_attributes_sb=$("#tmp_attributes_sb").select2("data");
+					if (pa_option_sb !== null && pa_attributes_sb !== null) {
+						var selected_pa_option_id=pa_option_sb.id;
+						var selected_pa_option_text=pa_option_sb.text;
+					} else {
+						var selected_pa_option_id="";
+						var selected_pa_option_text="";
+					}
+					var target_liwrapper_id="#products_attributes_item_" + selected_pa_option_id + " > div.items_wrapper";
+					if (selected_pa_option_id != "") {
+						var delete_button_html='<input type="button" value="delete" class="msadmin_button delete_product_attributes">';
+						// add class for marker
+						$(pa_main_divwrapper).addClass("new_attributes");
+						// check for the main tr if it exists
+						if ($("#product_attributes_content_row").length===0) {
+							var new_tr='<tr id="product_attributes_content_row"><td colspan="5"><ul id="products_attributes_items"></ul></td></tr>';
+							$(new_tr).insertBefore("#add_attributes_holder");
+							// activate sortable on ul > li
+							sort_li();
+						}
+						// destroy select2 before moving to <li>
+						$("#tmp_options_sb").select2("destroy");
+						$("#tmp_attributes_sb").select2("destroy");
+						// check if the <li> is exist
+						if ($(target_liwrapper_id).length) {
+							// directly append if exist
+							if ($(target_liwrapper_id).children().last().hasClass("odd_item_row")) {
+								$(pa_main_divwrapper).addClass("even_item_row");
+							} else {
+								$(pa_main_divwrapper).addClass("odd_item_row");
+							}
+							// rewrite the button
+							$(this).parent().empty().html(delete_button_html);
+							// flush it to existing li
+							$(target_liwrapper_id).append(pa_main_divwrapper);
+							if ($(target_liwrapper_id).is(":hidden")) {
+								$(target_liwrapper_id).prev().children().removeClass("items_wrapper_folded").addClass("items_wrapper_unfolded").html("fold");
+								$(target_liwrapper_id).show();
+							}
+						} else {
+							var li_class="odd_group_row";
+							if ($(".products_attributes_items").children().last().hasClass("odd_group_row")) {
+								li_class="even_group_row";
+							}
+							var new_li = $("<li/>", {
+								id: "products_attributes_item_" + selected_pa_option_id,
+								alt: selected_pa_option_text,
+								class: "products_attributes_item " + li_class
+							});
+							$(new_li).append('<span class="option_name">' + selected_pa_option_text + ' <a href="#" class="items_wrapper_unfolded">fold</a></span><div class="items_wrapper"></div><div class="add_new_attributes"><input type="button" class="msadmin_button add_new_attributes_values" value="Add new value [+]" rel="' + selected_pa_option_id + '" /></div>');
+							$(pa_main_divwrapper).addClass("odd_item_row");
+							// rewrite the button
+							$(this).parent().empty().html(delete_button_html);
+							// flush it to existing li
+							$(new_li).children("div.items_wrapper").append(pa_main_divwrapper);
+							// flush new li to the newly created tr > ul
+							$("#products_attributes_items").append(new_li);
+							// activate sorting for li children
+							sort_li_children();
+						}
+						// appended to select2 class name for newly created select2 instantiation
+						// so it wont refresh others select2 elements
+						var d = new Date();
+						var n = d.getTime();
+						$("#tmp_options_sb").addClass("product_attribute_options" + n);
+						$("#tmp_attributes_sb").addClass("product_attribute_values" + n);
+						// remove id for reuse later
+						$("#tmp_options_sb").removeAttr("id");
+						$("#tmp_attributes_sb").removeAttr("id");
+						// init the select2 for new product attributes
+						select2_sb(".product_attribute_options" + n, "choose option", "product_attribute_options_dropdown", "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=get_attributes_options");
+						select2_values_sb(".product_attribute_values" + n, "choose attribute", "product_attribute_values_dropdown", "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=get_attributes_values");
+						// clear the temp holder
+						$("tr#add_attributes_holder > td").html("&nbsp;");
+						$("#add_attributes_button").show();
+					} else {
+						msDialog("ERROR","Please select options and attributes value!");
+					}
+				});
+				$(document).on("click", "#manual_button", function(event) {
+					jQuery("#attributes_header").show();
+				});
+				$(document).on("click", "span.option_name", function(e){
+					e.preventDefault();
+					var self = $(this).children("a");
+					var li_this=$(self).parent().parent();
+					if($(self).hasClass("items_wrapper_unfolded")) {
+						$(li_this).children("div.items_wrapper").hide();
+						$(li_this).children("div.add_new_attributes").hide();
+						$(self).removeClass("items_wrapper_unfolded");
+						$(self).addClass("items_wrapper_folded").html("unfold");
+					} else {
+						$(li_this).children("div.items_wrapper").show();
+						$(li_this).children("div.add_new_attributes").show();
+						$(self).removeClass("items_wrapper_folded");
+						$(self).addClass("items_wrapper_unfolded").html("fold");
+					}
+				});
+				jQuery(document).on("click", ".delete_product_attributes", function(){
+					var pa_main_divwrapper=$(this).parent().parent().parent().parent().parent();
+					var pa_main_liwrapper=$(pa_main_divwrapper).parent();
+					var product_attribute_id=$(pa_main_divwrapper).attr("rel");
+					if (product_attribute_id != "new") {
+						href = "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=delete_product_attributes&pid=8";
+						jQuery.ajax({
+							type:"POST",
+							url:href,
+							data: "paid=" + product_attribute_id,
+							success: function(msg) {
+								//do something with the sorted data
+							}
+						});
+					}
+					$(pa_main_divwrapper).remove();
+					if ($(pa_main_liwrapper).children().length === 0) {
+						$(pa_main_liwrapper).parent().remove();
+					}
+				});
+				jQuery(document).on("click", ".delete_tmp_product_attributes", function(){
+					var pa_main_divwrapper=$(this).parent().parent().parent().parent().parent();
+					$(pa_main_divwrapper).remove();
+
+					$("tr#add_attributes_holder > td").html("&nbsp;");
+					$("#add_attributes_button").show();
+				});
+				var select2_sb = function(selector_str, placeholder, dropdowncss, ajax_url) {
+					$(selector_str).select2({
+						placeholder: placeholder,
+						createSearchChoice:function(term, data) {
+							if (attributesOptions[term] === undefined) {
+								attributesOptions[term]={id: term, text: term};
+							}
+							return {id:term, text:term};
+						},
+						minimumInputLength: 0,
+						query: function(query) {
+							if (attributesSearchOptions[query.term] !== undefined) {
+								query.callback({results: attributesSearchOptions[query.term]});
+							} else {
+								$.ajax(ajax_url, {
+									data: {
+										q: query.term
+									},
+									dataType: "json"
+								}).done(function(data) {
+									attributesSearchOptions[query.term]=data;
+									query.callback({results: data});
+								});
+							}
+						},
+						initSelection: function(element, callback) {
+							var id=$(element).val();
+							if (id!=="") {
+								if (attributesOptions[id] !== undefined) {
+									callback(attributesOptions[id]);
+								} else {
+									$.ajax(ajax_url, {
+										data: {
+											preselected_id: id
+										},
+										dataType: "json"
+									}).done(function(data) {
+										attributesOptions[data.id]={id: data.id, text: data.text};
+										callback(data);
+									});
+								}
+							}
+						},
+						formatResult: function(data){
+							if (data.text === undefined) {
+								$.each(data, function(i,val){
+									return val.text;
+								});
+							} else {
+								return data.text;
+							}
+						},
+						formatSelection: function(data){
+							if (data.text === undefined) {
+								return data[0].text;
+							} else {
+								return data.text;
+							}
+						},
+						dropdownCssClass: dropdowncss,
+						escapeMarkup: function (m) { return m; }
+					}).on("select2-selecting", function(e) {
+						if (e.object.id == e.object.text) {
+							$(this).next().val("1");
+						} else {
+							$(this).next().val("0");
+						}
+					});
+				}
+				var select2_values_sb = function(selector_str, placeholder, dropdowncss, ajax_url) {
+					$(selector_str).select2({
+						placeholder: placeholder,
+						createSearchChoice:function(term, data) {
+							if ($(data).filter(function() {
+								return this.text.localeCompare(term)===0;
+							}).length===0) {
+								if (attributesValues[term] === undefined) {
+									attributesValues[term]={id: term, text: term};
+								}
+								return {id:term, text:term};
+							}
+						},
+						minimumInputLength: 0,
+						query: function(query) {
+							if (attributesSearchValues[query.term] !== undefined) {
+								query.callback({results: attributesSearchValues[query.term]});
+							} else {
+								$.ajax(ajax_url, {
+									data: {
+										q: query.term + "||optid=" +  $(selector_str).parent().prev().children("input").val()
+									},
+									dataType: "json"
+								}).done(function(data) {
+									attributesSearchValues[query.term]=data;
+									query.callback({results: data});
+								});
+							}
+						},
+						initSelection: function(element, callback) {
+							var id=$(element).val();
+							if (id!=="") {
+								if (attributesValues[id] !== undefined) {
+									callback(attributesValues[id]);
+								} else {
+									$.ajax(ajax_url, {
+										data: {
+											preselected_id: id,
+										},
+										dataType: "json"
+									}).done(function(data) {
+										attributesValues[data.id]={id: data.id, text: data.text};
+										callback(data);
+									});
+								}
+							}
+						},
+						formatResult: function(data){
+							var tmp_data=data.text.split("||");
+							return tmp_data[0];
+						},
+						formatSelection: function(data){
+							if (data.text === undefined) {
+								return data[0].text;
+							} else {
+								return data.text;
+							}
+						},
+						dropdownCssClass: dropdowncss,
+						escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+					}).on("select2-selecting", function(e) {
+						if (e.object.id == e.object.text) {
+							$(this).next().val("1");
+						} else {
+							$(this).next().val("0");
+						}
+					});;
+				}
+				var sort_li = function () {
+					jQuery("#products_attributes_items").sortable({
+
+						update: function(e, ui) {
+							href = "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=sort_product_attributes_option&pid=8";
+							jQuery(this).sortable("refresh");
+							sorted = jQuery(this).sortable("serialize", "id");
+							jQuery.ajax({
+								type:"POST",
+								url:href,
+								data:sorted,
+								success: function(msg) {
+									//do something with the sorted data
+								}
+							});
+						},
+
+						cursor:"move",
+						items:">li.products_attributes_item"
+					});
+				}
+				var sort_li_children = function () {
+					jQuery(".items_wrapper").sortable({
+
+						update: function(e, ui) {
+							href = "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=sort_product_attributes_value&pid=8";
+							jQuery(this).sortable("refresh");
+							sorted = jQuery(this).sortable("serialize", "id");
+							jQuery.ajax({
+								type:"POST",
+								url:href,
+								data:sorted,
+								success: function(msg) {
+									//do something with the sorted data
+								}
+							});
+						},
+
+						cursor:"move",
+						items:">div.wrap-attributes-item"
+					});
+				}
+				sort_li();
+				sort_li_children();
+				$(".items_wrapper").hide();
+				$(".add_new_attributes").hide();
+				select2_sb(".product_attribute_options", "choose option", "product_attribute_options_dropdown", "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=get_attributes_options");
+				select2_values_sb(".product_attribute_values", "choose attribute", "product_attribute_values_dropdown", "multishop/mujeres/tops/section/admin_ajax_product_attributes/?tx_multishop_pi1%5Badmin_ajax_product_attributes%5D=get_attributes_values");
+			});
+			</script>
+			<h1>###LABEL_HEADING_TAB_VARIANTS###</h1>
+			<table width="100%" cellpadding="2" cellspacing="2" id="product_attributes_table">
+				<tbody>
+					<tr id="product_attributes_content_row">
+						<td colspan="5">
+							<ul id="products_attributes_items" class="ui-sortable">
+
+							<li id="products_attributes_item_2" alt="Talla" class="products_attributes_item odd_group_row" style="">
+
+							<span class="option_name">Talla <a href="#" class="items_wrapper_unfolded">fold</a></span>
+							<div class="items_wrapper ui-sortable" style="display: block;">
+							<div class="wrap-attributes-item odd_item_row" id="item_product_attribute_19" rel="19"><table><tbody><tr class="option_row"><td class="product_attribute_option"><div class="select2-container product_attribute_options" id="s2id_option_19" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">Talla</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen4"><div class="select2-drop select2-display-none product_attribute_options_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[options][]" id="option_19" class="product_attribute_options select2-offscreen" value="2" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_options][]" id="manual_option_19" value="0"><input type="hidden" name="tx_multishop_pi1[pa_id][]" value="19"></td><td class="product_attribute_value"><div class="select2-container product_attribute_values" id="s2id_attribute_19" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">S</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen9"><div class="select2-drop select2-display-none product_attribute_values_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[attributes][]" id="attribute_19" class="product_attribute_values select2-offscreen" value="7" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_attributes][]" id="manual_attributes_19" value="0"></td><td class="product_attribute_prefix"><select name="tx_multishop_pi1[prefix][]"><option value="">&nbsp;</option><option value="+" selected="selected">+</option><option value="-">-</option></select></td><td>
+											<div class="msAttributesField">Bs <input type="text" id="display_name" name="display_name" class="msAttributesPriceExcludingVat" value="0.00"><label for="display_name">sin impuestos (I.G.I.C)</label></div>
+											<div class="msAttributesField">Bs <input type="text" name="display_name" id="display_name" class="msAttributesPriceIncludingVat" value="0.00"><label for="display_name">Incl. VAT</label></div>
+											<div class="msAttributesField hidden"><input type="hidden" name="tx_multishop_pi1[price][]" value="0.00000000000000"></div>
+										</td><td class="product_attribute_price"><input type="button" value="delete" class="msadmin_button delete_product_attributes"></td></tr></tbody></table></div><div class="wrap-attributes-item even_item_row" id="item_product_attribute_21" rel="21"><table><tbody><tr class="option_row"><td class="product_attribute_option"><div class="select2-container product_attribute_options" id="s2id_option_21" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">Talla</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen5"><div class="select2-drop select2-display-none product_attribute_options_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[options][]" id="option_21" class="product_attribute_options select2-offscreen" value="2" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_options][]" id="manual_option_21" value="0"><input type="hidden" name="tx_multishop_pi1[pa_id][]" value="21"></td><td class="product_attribute_value"><div class="select2-container product_attribute_values" id="s2id_attribute_21" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">M</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen10"><div class="select2-drop select2-display-none product_attribute_values_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[attributes][]" id="attribute_21" class="product_attribute_values select2-offscreen" value="2" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_attributes][]" id="manual_attributes_21" value="0"></td><td class="product_attribute_prefix"><select name="tx_multishop_pi1[prefix][]"><option value="">&nbsp;</option><option value="+" selected="selected">+</option><option value="-">-</option></select></td><td>
+											<div class="msAttributesField">Bs <input type="text" id="display_name" name="display_name" class="msAttributesPriceExcludingVat" value="0.00"><label for="display_name">sin impuestos (I.G.I.C)</label></div>
+											<div class="msAttributesField">Bs <input type="text" name="display_name" id="display_name" class="msAttributesPriceIncludingVat" value="0.00"><label for="display_name">Incl. VAT</label></div>
+											<div class="msAttributesField hidden"><input type="hidden" name="tx_multishop_pi1[price][]" value="0.00000000000000"></div>
+										</td><td class="product_attribute_price"><input type="button" value="delete" class="msadmin_button delete_product_attributes"></td></tr></tbody></table></div><div class="wrap-attributes-item odd_item_row" id="item_product_attribute_14" rel="14"><table><tbody><tr class="option_row"><td class="product_attribute_option"><div class="select2-container product_attribute_options" id="s2id_option_14" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">Talla</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen6"><div class="select2-drop select2-display-none product_attribute_options_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[options][]" id="option_14" class="product_attribute_options select2-offscreen" value="2" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_options][]" id="manual_option_14" value="0"><input type="hidden" name="tx_multishop_pi1[pa_id][]" value="14"></td><td class="product_attribute_value"><div class="select2-container product_attribute_values" id="s2id_attribute_14" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">M</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen11"><div class="select2-drop select2-display-none product_attribute_values_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[attributes][]" id="attribute_14" class="product_attribute_values select2-offscreen" value="2" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_attributes][]" id="manual_attributes_14" value="0"></td><td class="product_attribute_prefix"><select name="tx_multishop_pi1[prefix][]"><option value="">&nbsp;</option><option value="+" selected="selected">+</option><option value="-">-</option></select></td><td>
+											<div class="msAttributesField">Bs <input type="text" id="display_name" name="display_name" class="msAttributesPriceExcludingVat" value="0.00"><label for="display_name">sin impuestos (I.G.I.C)</label></div>
+											<div class="msAttributesField">Bs <input type="text" name="display_name" id="display_name" class="msAttributesPriceIncludingVat" value="0.00"><label for="display_name">Incl. VAT</label></div>
+											<div class="msAttributesField hidden"><input type="hidden" name="tx_multishop_pi1[price][]" value="0.00000000000000"></div>
+										</td><td class="product_attribute_price"><input type="button" value="delete" class="msadmin_button delete_product_attributes"></td></tr></tbody></table></div><div class="wrap-attributes-item even_item_row" id="item_product_attribute_15" rel="15"><table><tbody><tr class="option_row"><td class="product_attribute_option"><div class="select2-container product_attribute_options" id="s2id_option_15" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">Talla</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen7"><div class="select2-drop select2-display-none product_attribute_options_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[options][]" id="option_15" class="product_attribute_options select2-offscreen" value="2" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_options][]" id="manual_option_15" value="0"><input type="hidden" name="tx_multishop_pi1[pa_id][]" value="15"></td><td class="product_attribute_value"><div class="select2-container product_attribute_values" id="s2id_attribute_15" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">L</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen12"><div class="select2-drop select2-display-none product_attribute_values_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[attributes][]" id="attribute_15" class="product_attribute_values select2-offscreen" value="3" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_attributes][]" id="manual_attributes_15" value="0"></td><td class="product_attribute_prefix"><select name="tx_multishop_pi1[prefix][]"><option value="">&nbsp;</option><option value="+" selected="selected">+</option><option value="-">-</option></select></td><td>
+											<div class="msAttributesField">Bs <input type="text" id="display_name" name="display_name" class="msAttributesPriceExcludingVat" value="0.00"><label for="display_name">sin impuestos (I.G.I.C)</label></div>
+											<div class="msAttributesField">Bs <input type="text" name="display_name" id="display_name" class="msAttributesPriceIncludingVat" value="0.00"><label for="display_name">Incl. VAT</label></div>
+											<div class="msAttributesField hidden"><input type="hidden" name="tx_multishop_pi1[price][]" value="0.00000000000000"></div>
+										</td><td class="product_attribute_price"><input type="button" value="delete" class="msadmin_button delete_product_attributes"></td></tr></tbody></table></div></div><div class="add_new_attributes" style="display: block;"><input type="button" class="msadmin_button add_new_attributes_values" value="Add new value [+]" rel="2"></div>
+							</li>
+
+
+						<li id="products_attributes_item_3" alt="Color" class="products_attributes_item even_group_row" style="">
+							<span class="option_name">Color <a href="#" class="items_wrapper_unfolded">fold</a></span>
+							<div class="items_wrapper ui-sortable" style="display: block;">
+							<div class="wrap-attributes-item odd_item_row" id="item_product_attribute_20" rel="20"><table><tbody><tr class="option_row"><td class="product_attribute_option"><div class="select2-container product_attribute_options" id="s2id_option_20" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">Color</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen8"><div class="select2-drop select2-display-none product_attribute_options_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[options][]" id="option_20" class="product_attribute_options select2-offscreen" value="3" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_options][]" id="manual_option_20" value="0"><input type="hidden" name="tx_multishop_pi1[pa_id][]" value="20"></td><td class="product_attribute_value"><div class="select2-container product_attribute_values" id="s2id_attribute_20" style="width: 200px;"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span class="select2-chosen">Rojo</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow"><b></b></span></a><input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen13"><div class="select2-drop select2-display-none product_attribute_values_dropdown select2-with-searchbox">   <div class="select2-search">       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><input type="hidden" name="tx_multishop_pi1[attributes][]" id="attribute_20" class="product_attribute_values select2-offscreen" value="5" style="width:200px" tabindex="-1"><input type="hidden" name="tx_multishop_pi1[is_manual_attributes][]" id="manual_attributes_20" value="0"></td><td class="product_attribute_prefix"><select name="tx_multishop_pi1[prefix][]"><option value="">&nbsp;</option><option value="+" selected="selected">+</option><option value="-">-</option></select></td><td>
+											<div class="msAttributesField">Bs <input type="text" id="display_name" name="display_name" class="msAttributesPriceExcludingVat" value="0.00"><label for="display_name">sin impuestos (I.G.I.C)</label></div>
+											<div class="msAttributesField">Bs <input type="text" name="display_name" id="display_name" class="msAttributesPriceIncludingVat" value="0.00"><label for="display_name">Incl. VAT</label></div>
+											<div class="msAttributesField hidden"><input type="hidden" name="tx_multishop_pi1[price][]" value="0.00000000000000"></div>
+										</td>
+
+							<td class="product_attribute_price"><input type="button" value="delete" class="msadmin_button delete_product_attributes"></td></tr></tbody></table></div></div><div class="add_new_attributes" style="display: block;"><input type="button" class="msadmin_button add_new_attributes_values" value="Add new value [+]" rel="3"></div>
+						</li>
+
+			</ul></td></tr>
+
+			<tr id="add_attributes_holder">
+				<td colspan="5">&nbsp;</td>
+			</tr>
+
+			<tr id="add_attributes_button">
+					<td colspan="5" align="right"><input id="addAttributes" type="button" class="msadmin_button" value="Add new attributes [+]"></td>
+			</tr>
+
+			</tbody></table>
+			<script>
+			$(document).on("keyup", ".msAttributesPriceExcludingVat", function() {
+				productPrice(true, $(this));
+			});
+			$(document).on("keyup", ".msAttributesPriceIncludingVat", function() {
+				productPrice(false, $(this));
+			});
+			</script>
+
+</div>

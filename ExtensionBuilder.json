@@ -1,0 +1,148 @@
+{
+    "modules": [
+        {
+            "config": {
+                "position": [
+                    129,
+                    58
+                ]
+            },
+            "name": "New Model Object",
+            "value": {
+                "actionGroup": {
+                    "_default0_list": false,
+                    "_default1_show": false,
+                    "_default2_new_create": false,
+                    "_default3_edit_update": false,
+                    "_default4_delete": false,
+                    "customActions": []
+                },
+                "name": "Variants",
+                "objectsettings": {
+                    "addDeletedField": true,
+                    "addHiddenField": true,
+                    "addStarttimeEndtimeFields": true,
+                    "aggregateRoot": true,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": "",
+                    "sorting": false,
+                    "type": "Entity",
+                    "uid": "720386095378"
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "productId",
+                            "propertyType": "Integer",
+                            "uid": "1130891022435"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "productAttributeId",
+                            "propertyType": "Integer",
+                            "uid": "175994639683"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "optionId",
+                            "propertyType": "Integer",
+                            "uid": "526197162113"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "optionValueId",
+                            "propertyType": "Integer",
+                            "uid": "60138498206"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "variantPrice",
+                            "propertyType": "Float",
+                            "uid": "893146472319"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "variantStock",
+                            "propertyType": "Integer",
+                            "uid": "1063488708455"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "variantSku",
+                            "propertyType": "String",
+                            "uid": "528153463754"
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
+        }
+    ],
+    "properties": {
+        "backendModules": [],
+        "description": "This extension provides variants to multishop products.",
+        "emConf": {
+            "category": "fe",
+            "custom_category": "",
+            "dependsOn": "typo3 => 6.2\n",
+            "disableLocalization": false,
+            "disableVersioning": false,
+            "sourceLanguage": "en",
+            "state": "alpha",
+            "targetVersion": "6.2",
+            "version": ""
+        },
+        "extensionKey": "msvariants",
+        "name": "Multishop Variants",
+        "originalExtensionKey": "msvariants",
+        "persons": [
+            {
+                "company": "Viboo Technologies",
+                "email": "piramidex@gmail.com",
+                "name": "Alfredo A. Villalba Castro",
+                "role": "Developer"
+            }
+        ],
+        "plugins": [],
+        "vendorName": "Piramidex"
+    },
+    "wires": [],
+    "log": {
+        "last_modified": "2016-01-08 09:15",
+        "extension_builder_version": "6.2.0",
+        "be_user": " (1)"
+    }
+}

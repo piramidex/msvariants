@@ -1,0 +1,62 @@
+<!-- ###TEMPLATE### begin -->
+<div style="display: block;" id="product_variants" class="tab_content">
+
+			<input name="options_form" type="hidden" value="1">
+
+			<h1>###LABEL_HEADING_TAB_VARIANTS###</h1>
+
+			<table width="100%" cellpadding="2" cellspacing="2" id="product_variants_table">
+				<tbody>
+
+					<tr id="product_variants_content_row">
+						<td colspan="5">
+							<ul id="products_variants_items" class="ui-sortable">
+
+								<!-- ###ITEM_VARIANT### begin -->
+								<li id="products_variants_item_###VARIANT_ITEM_ID###" alt="###VARIANT_ITEM_ALT###" class="products_variants_item odd_group_row" style="">
+									<span class="option_name" style="background-color:grey; color:white;">###LABEL_VARIANT_NAME###<a href="#" class="items_wrapper_unfolded">fold</a></span>
+									<!--- <div class="items_wrapper ui-sortable" style="display: block;"> --->
+
+														<!-- ###ITEM_OPTION### begin -->
+									          <div>
+															<label>###OPTION_NAME###</label><label>###OPTION_VALUE###</label>
+									          </div>
+														<!-- ###ITEM_OPTION### end -->
+
+									          <div>
+									            <label>###LABEL_PRICE###</label><input type="text" name="variants_price_excl_vat" class="price small_input msPriceExcludingVat" id="variants_price_excl_vat" value="###PRICE###">
+									          </div>
+
+									          <div>
+									            <label>###LABEL_STOCK###</label><input type="text" name="variants_quantity" class="variants_quantity" id="variants_quantity" value="###STOCK###">
+									          </div>
+
+									          <div>
+									            <label>###LABEL_SKU###</label><input type="text" class="text" name="variants_sku_code" id="variants_sku_code" maxlength="13" value="###SKU###">
+									          </div>
+						    </li>
+						    <!-- ###ITEM_VARIANT### end -->
+
+			</ul>
+		</td></tr>
+
+			<tr id="add_attributes_holder">
+				<td colspan="5">&nbsp;</td>
+			</tr>
+
+			<tr id="add_attributes_button">
+					<td colspan="5" align="right"><input id="addAttributes" type="button" class="msadmin_button" value="Add new attributes [+]"></td>
+			</tr>
+
+			</tbody></table>
+			<script>
+			$(document).on("keyup", ".msAttributesPriceExcludingVat", function() {
+				productPrice(true, $(this));
+			});
+			$(document).on("keyup", ".msAttributesPriceIncludingVat", function() {
+				productPrice(false, $(this));
+			});
+			</script>
+
+</div>
+<!-- ###TEMPLATE### end -->

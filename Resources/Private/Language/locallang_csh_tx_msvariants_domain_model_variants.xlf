@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-08T21:15:53Z" product-name="msvariants">
+		<header/>
+		<body>
+			<trans-unit id="product_id.description">
+				<source>productId</source>
+			</trans-unit>
+			<trans-unit id="product_attribute_id.description">
+				<source>productAttributeId</source>
+			</trans-unit>
+			<trans-unit id="option_id.description">
+				<source>optionId</source>
+			</trans-unit>
+			<trans-unit id="option_value_id.description">
+				<source>optionValueId</source>
+			</trans-unit>
+			<trans-unit id="variant_price.description">
+				<source>variantPrice</source>
+			</trans-unit>
+			<trans-unit id="variant_stock.description">
+				<source>variantStock</source>
+			</trans-unit>
+			<trans-unit id="variant_sku.description">
+				<source>variantSku</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

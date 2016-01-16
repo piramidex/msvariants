@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-08T21:15:53Z" product-name="msvariants">
+		<header/>
+		<body>
+			<trans-unit id="tx_msvariants_domain_model_variants">
+				<source>Variants</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variants.product_id">
+				<source>Product Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variants.product_attribute_id">
+				<source>Product Attribute Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variants.option_id">
+				<source>Option Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variants.option_value_id">
+				<source>Option Value Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variants.variant_price">
+				<source>Variant Price</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variants.variant_stock">
+				<source>Variant Stock</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variants.variant_sku">
+				<source>Variant Sku</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
