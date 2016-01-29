@@ -3,8 +3,8 @@
         {
             "config": {
                 "position": [
-                    129,
-                    58
+                    193,
+                    60
                 ]
             },
             "name": "New Model Object",
@@ -39,39 +39,19 @@
                             "propertyDescription": "",
                             "propertyIsExcludeField": false,
                             "propertyIsRequired": true,
+                            "propertyName": "variantId",
+                            "propertyType": "Integer",
+                            "uid": "766580570908"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
                             "propertyName": "productId",
                             "propertyType": "Integer",
                             "uid": "1130891022435"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": false,
-                            "propertyIsRequired": true,
-                            "propertyName": "productAttributeId",
-                            "propertyType": "Integer",
-                            "uid": "175994639683"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": false,
-                            "propertyIsRequired": true,
-                            "propertyName": "optionId",
-                            "propertyType": "Integer",
-                            "uid": "526197162113"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": false,
-                            "propertyIsRequired": true,
-                            "propertyName": "optionValueId",
-                            "propertyType": "Integer",
-                            "uid": "60138498206"
                         },
                         {
                             "allowedFileTypes": "",
@@ -102,6 +82,96 @@
                             "propertyName": "variantSku",
                             "propertyType": "String",
                             "uid": "528153463754"
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
+        },
+        {
+            "config": {
+                "position": [
+                    490,
+                    138
+                ]
+            },
+            "name": "New Model Object",
+            "value": {
+                "actionGroup": {
+                    "_default0_list": false,
+                    "_default1_show": false,
+                    "_default2_new_create": false,
+                    "_default3_edit_update": false,
+                    "_default4_delete": false,
+                    "customActions": []
+                },
+                "name": "VariantsAttributes",
+                "objectsettings": {
+                    "addDeletedField": true,
+                    "addHiddenField": true,
+                    "addStarttimeEndtimeFields": true,
+                    "aggregateRoot": false,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": "",
+                    "sorting": false,
+                    "type": "Entity",
+                    "uid": "497915526734"
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "variantId",
+                            "propertyType": "Integer",
+                            "uid": "437372101867"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "productId",
+                            "propertyType": "Integer",
+                            "uid": "407032965436"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "attributeId",
+                            "propertyType": "Integer",
+                            "uid": "931196082614"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "optionId",
+                            "propertyType": "Integer",
+                            "uid": "1212122334350"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "optionValueId",
+                            "propertyType": "Integer",
+                            "uid": "1365394141185"
                         }
                     ]
                 },
@@ -141,7 +211,7 @@
     },
     "wires": [],
     "log": {
-        "last_modified": "2016-01-08 09:15",
+        "last_modified": "2016-01-16 04:17",
         "extension_builder_version": "6.2.0",
         "be_user": " (1)"
     }

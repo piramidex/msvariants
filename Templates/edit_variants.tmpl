@@ -24,16 +24,17 @@
 														<!-- ###ITEM_OPTION### end -->
 
 									          <div>
-									            <label>###LABEL_PRICE###</label><input type="text" name="variants_price_excl_vat" class="price small_input msPriceExcludingVat" id="variants_price_excl_vat" value="###PRICE###">
+									            <label>###LABEL_PRICE###</label><input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="###PRICE###">
 									          </div>
 
 									          <div>
-									            <label>###LABEL_STOCK###</label><input type="text" name="variants_quantity" class="variants_quantity" id="variants_quantity" value="###STOCK###">
+									            <label>###LABEL_STOCK###</label><input type="text" name="variants_stocks[]" class="variants_stock" id="variants_stocks[]" value="###STOCK###">
 									          </div>
 
 									          <div>
-									            <label>###LABEL_SKU###</label><input type="text" class="text" name="variants_sku_code" id="variants_sku_code" maxlength="13" value="###SKU###">
+									            <label>###LABEL_SKU###</label><input type="text" class="text" name="variants_skus[]" id="variants_skus[]" maxlength="13" value="###SKU###">
 									          </div>
+									<input type="hidden" name="variants_ids[]" id="variants_ids[]" value="###VARIANT_ID###">
 						    </li>
 						    <!-- ###ITEM_VARIANT### end -->
 

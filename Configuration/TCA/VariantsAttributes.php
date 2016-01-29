@@ -3,13 +3,13 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$GLOBALS['TCA']['tx_msvariants_domain_model_variants'] = array(
-	'ctrl' => $GLOBALS['TCA']['tx_msvariants_domain_model_variants']['ctrl'],
+$GLOBALS['TCA']['tx_msvariants_domain_model_variantsattributes'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_msvariants_domain_model_variantsattributes']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, variant_id, product_id, variant_price, variant_stock, variant_sku',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, variant_id, product_id, attribute_id, option_id, option_value_id',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, variant_id, product_id, variant_price, variant_stock, variant_sku, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, variant_id, product_id, attribute_id, option_id, option_value_id, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -38,8 +38,8 @@ $GLOBALS['TCA']['tx_msvariants_domain_model_variants'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_msvariants_domain_model_variants',
-				'foreign_table_where' => 'AND tx_msvariants_domain_model_variants.pid=###CURRENT_PID### AND tx_msvariants_domain_model_variants.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_msvariants_domain_model_variantsattributes',
+				'foreign_table_where' => 'AND tx_msvariants_domain_model_variantsattributes.pid=###CURRENT_PID### AND tx_msvariants_domain_model_variantsattributes.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -98,49 +98,49 @@ $GLOBALS['TCA']['tx_msvariants_domain_model_variants'] = array(
 		),
 
 		'variant_id' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.variant_id',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variantsattributes.variant_id',
 			'config' => array(
 				'type' => 'input',
 				'size' => 4,
-				'eval' => 'int,required'
+				'eval' => 'int'
 			)
 		),
 		'product_id' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.product_id',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variantsattributes.product_id',
 			'config' => array(
 				'type' => 'input',
 				'size' => 4,
-				'eval' => 'int,required'
+				'eval' => 'int'
 			)
 		),
-		'variant_price' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.variant_price',
-			'config' => array(
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'double2,required'
-			)
-		),
-		'variant_stock' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.variant_stock',
+		'attribute_id' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variantsattributes.attribute_id',
 			'config' => array(
 				'type' => 'input',
 				'size' => 4,
-				'eval' => 'int,required'
+				'eval' => 'int'
 			)
 		),
-		'variant_sku' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.variant_sku',
+		'option_id' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variantsattributes.option_id',
 			'config' => array(
 				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim,required'
-			),
+				'size' => 4,
+				'eval' => 'int'
+			)
+		),
+		'option_value_id' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variantsattributes.option_value_id',
+			'config' => array(
+				'type' => 'input',
+				'size' => 4,
+				'eval' => 'int'
+			)
 		),
 		
 	),

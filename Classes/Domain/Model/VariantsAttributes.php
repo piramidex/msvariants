@@ -27,15 +27,14 @@ namespace Piramidex\Msvariants\Domain\Model;
  ***************************************************************/
 
 /**
- * Variants
+ * VariantsAttributes
  */
-class Variants extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class VariantsAttributes extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * variantId
 	 *
 	 * @var integer
-	 * @validate NotEmpty
 	 */
 	protected $variantId = 0;
 
@@ -43,33 +42,29 @@ class Variants extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * productId
 	 *
 	 * @var integer
-	 * @validate NotEmpty
 	 */
 	protected $productId = 0;
 
 	/**
-	 * variantPrice
-	 *
-	 * @var float
-	 * @validate NotEmpty
-	 */
-	protected $variantPrice = 0.0;
-
-	/**
-	 * variantStock
+	 * attributeId
 	 *
 	 * @var integer
-	 * @validate NotEmpty
 	 */
-	protected $variantStock = 0;
+	protected $attributeId = 0;
 
 	/**
-	 * variantSku
+	 * optionId
 	 *
-	 * @var string
-	 * @validate NotEmpty
+	 * @var integer
 	 */
-	protected $variantSku = '';
+	protected $optionId = 0;
+
+	/**
+	 * optionValueId
+	 *
+	 * @var integer
+	 */
+	protected $optionValueId = 0;
 
 	/**
 	 * Returns the productId
@@ -91,60 +86,60 @@ class Variants extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Returns the variantPrice
+	 * Returns the attributeId
 	 *
-	 * @return float $variantPrice
+	 * @return integer $attributeId
 	 */
-	public function getVariantPrice() {
-		return $this->variantPrice;
+	public function getAttributeId() {
+		return $this->attributeId;
 	}
 
 	/**
-	 * Sets the variantPrice
+	 * Sets the attributeId
 	 *
-	 * @param float $variantPrice
+	 * @param integer $attributeId
 	 * @return void
 	 */
-	public function setVariantPrice($variantPrice) {
-		$this->variantPrice = $variantPrice;
+	public function setAttributeId($attributeId) {
+		$this->attributeId = $attributeId;
 	}
 
 	/**
-	 * Returns the variantStock
+	 * Returns the optionId
 	 *
-	 * @return integer $variantStock
+	 * @return integer $optionId
 	 */
-	public function getVariantStock() {
-		return $this->variantStock;
+	public function getOptionId() {
+		return $this->optionId;
 	}
 
 	/**
-	 * Sets the variantStock
+	 * Sets the optionId
 	 *
-	 * @param integer $variantStock
+	 * @param integer $optionId
 	 * @return void
 	 */
-	public function setVariantStock($variantStock) {
-		$this->variantStock = $variantStock;
+	public function setOptionId($optionId) {
+		$this->optionId = $optionId;
 	}
 
 	/**
-	 * Returns the variantSku
+	 * Returns the optionValueId
 	 *
-	 * @return string $variantSku
+	 * @return integer $optionValueId
 	 */
-	public function getVariantSku() {
-		return $this->variantSku;
+	public function getOptionValueId() {
+		return $this->optionValueId;
 	}
 
 	/**
-	 * Sets the variantSku
+	 * Sets the optionValueId
 	 *
-	 * @param string $variantSku
+	 * @param integer $optionValueId
 	 * @return void
 	 */
-	public function setVariantSku($variantSku) {
-		$this->variantSku = $variantSku;
+	public function setOptionValueId($optionValueId) {
+		$this->optionValueId = $optionValueId;
 	}
 
 	/**

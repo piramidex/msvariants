@@ -27,21 +27,21 @@ namespace Piramidex\Msvariants\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \Piramidex\Msvariants\Domain\Model\Variants.
+ * Test case for class \Piramidex\Msvariants\Domain\Model\VariantsAttributes.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  * @author Alfredo A. Villalba Castro <piramidex@gmail.com>
  */
-class VariantsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class VariantsAttributesTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
-	 * @var \Piramidex\Msvariants\Domain\Model\Variants
+	 * @var \Piramidex\Msvariants\Domain\Model\VariantsAttributes
 	 */
 	protected $subject = NULL;
 
 	protected function setUp() {
-		$this->subject = new \Piramidex\Msvariants\Domain\Model\Variants();
+		$this->subject = new \Piramidex\Msvariants\Domain\Model\VariantsAttributes();
 	}
 
 	protected function tearDown() {
@@ -97,47 +97,22 @@ class VariantsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function getVariantPriceReturnsInitialValueForFloat() {
-		$this->assertSame(
-			0.0,
-			$this->subject->getVariantPrice()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setVariantPriceForFloatSetsVariantPrice() {
-		$this->subject->setVariantPrice(3.14159265);
-
-		$this->assertAttributeEquals(
-			3.14159265,
-			'variantPrice',
-			$this->subject,
-			'',
-			0.000000001
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getVariantStockReturnsInitialValueForInteger() {
+	public function getAttributeIdReturnsInitialValueForInteger() {
 		$this->assertSame(
 			0,
-			$this->subject->getVariantStock()
+			$this->subject->getAttributeId()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setVariantStockForIntegerSetsVariantStock() {
-		$this->subject->setVariantStock(12);
+	public function setAttributeIdForIntegerSetsAttributeId() {
+		$this->subject->setAttributeId(12);
 
 		$this->assertAttributeEquals(
 			12,
-			'variantStock',
+			'attributeId',
 			$this->subject
 		);
 	}
@@ -145,22 +120,45 @@ class VariantsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function getVariantSkuReturnsInitialValueForString() {
+	public function getOptionIdReturnsInitialValueForInteger() {
 		$this->assertSame(
-			'',
-			$this->subject->getVariantSku()
+			0,
+			$this->subject->getOptionId()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setVariantSkuForStringSetsVariantSku() {
-		$this->subject->setVariantSku('Conceived at T3CON10');
+	public function setOptionIdForIntegerSetsOptionId() {
+		$this->subject->setOptionId(12);
 
 		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'variantSku',
+			12,
+			'optionId',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getOptionValueIdReturnsInitialValueForInteger() {
+		$this->assertSame(
+			0,
+			$this->subject->getOptionValueId()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setOptionValueIdForIntegerSetsOptionValueId() {
+		$this->subject->setOptionValueId(12);
+
+		$this->assertAttributeEquals(
+			12,
+			'optionValueId',
 			$this->subject
 		);
 	}

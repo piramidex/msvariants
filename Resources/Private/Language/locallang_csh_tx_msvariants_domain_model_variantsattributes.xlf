@@ -9,14 +9,14 @@
 			<trans-unit id="product_id.description">
 				<source>productId</source>
 			</trans-unit>
-			<trans-unit id="variant_price.description">
-				<source>variantPrice</source>
+			<trans-unit id="attribute_id.description">
+				<source>attributeId</source>
 			</trans-unit>
-			<trans-unit id="variant_stock.description">
-				<source>variantStock</source>
+			<trans-unit id="option_id.description">
+				<source>optionId</source>
 			</trans-unit>
-			<trans-unit id="variant_sku.description">
-				<source>variantSku</source>
+			<trans-unit id="option_value_id.description">
+				<source>optionValueId</source>
 			</trans-unit>
 		</body>
 	</file>
