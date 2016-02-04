@@ -3,11 +3,14 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-04T22:28:54Z" product-name="msvariants">
 		<header/>
 		<body>
-			<trans-unit id="variant_id.description">
-				<source>variantId</source>
+			<trans-unit id="order_id.description">
+				<source>orderId</source>
 			</trans-unit>
 			<trans-unit id="product_id.description">
 				<source>productId</source>
+			</trans-unit>
+			<trans-unit id="variant_id.description">
+				<source>variantId</source>
 			</trans-unit>
 			<trans-unit id="attribute_id.description">
 				<source>attributeId</source>
@@ -17,6 +20,12 @@
 			</trans-unit>
 			<trans-unit id="option_value_id.description">
 				<source>optionValueId</source>
+			</trans-unit>
+			<trans-unit id="option_name.description">
+				<source>optionName</source>
+			</trans-unit>
+			<trans-unit id="option_value_name.description">
+				<source>optionValueName</source>
 			</trans-unit>
 		</body>
 	</file>

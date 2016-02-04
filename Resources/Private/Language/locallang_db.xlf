@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-16T16:17:38Z" product-name="msvariants">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-04T22:28:54Z" product-name="msvariants">
 		<header/>
 		<body>
 			<trans-unit id="tx_msvariants_domain_model_variants">
@@ -38,6 +38,54 @@
 			</trans-unit>
 			<trans-unit id="tx_msvariants_domain_model_variantsattributes.option_value_id">
 				<source>Option Value Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsorders">
+				<source>Variants Orders</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsorders.order_id">
+				<source>Order Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsorders.product_id">
+				<source>Product Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsorders.variant_id">
+				<source>Variant Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsorders.price">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsorders.quantity">
+				<source>Quantity</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsorders.sku">
+				<source>Sku</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders">
+				<source>Variants Attributes Orders</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders.order_id">
+				<source>Order Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders.product_id">
+				<source>Product Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders.variant_id">
+				<source>Variant Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders.attribute_id">
+				<source>Attribute Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders.option_id">
+				<source>Option Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders.option_value_id">
+				<source>Option Value Id</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders.option_name">
+				<source>Option Name</source>
+			</trans-unit>
+			<trans-unit id="tx_msvariants_domain_model_variantsattributesorders.option_value_name">
+				<source>Option Value Name</source>
 			</trans-unit>
 		</body>
 	</file>
