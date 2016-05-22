@@ -74,6 +74,13 @@ class VariantsOrders extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $sku = '';
 
 	/**
+	 * orderProductId
+	 *
+	 * @var integer
+	 */
+	protected $orderProductId = 0;
+
+	/**
 	 * Returns the orderId
 	 *
 	 * @return integer $orderId
@@ -185,6 +192,25 @@ class VariantsOrders extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setSku($sku) {
 		$this->sku = $sku;
+	}
+
+	/**
+	 * Returns the orderProductId
+	 *
+	 * @return integer $orderProductId
+	 */
+	public function getOrderProductId() {
+		return $this->orderProductId;
+	}
+
+	/**
+	 * Sets the orderProductId
+	 *
+	 * @param integer $orderProductId
+	 * @return void
+	 */
+	public function setOrderProductId($orderProductId) {
+		$this->orderProductId = $orderProductId;
 	}
 
 }

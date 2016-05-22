@@ -86,7 +86,7 @@ $GLOBALS['TCA']['tx_msvariants_domain_model_variantsorders'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'order_id,product_id,variant_id,price,quantity,sku,',
+		'searchFields' => 'order_id,product_id,variant_id,price,quantity,sku,order_product_id,',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/VariantsOrders.php',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_msvariants_domain_model_variantsorders.gif'
 	),
@@ -126,3 +126,4 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvari
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvariants').'/Classes/Hooks/class.tx_msvariants_updateproductposthook.php');
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvariants').'/Classes/Hooks/class.tx_msvariants_updatecartproductprehook.php');
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvariants').'/Classes/Hooks/class.tx_msvariants_insertordersproductpreproc.php');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvariants').'/Classes/Hooks/class.tx_msvariants_editorderlistitemprehook.php');

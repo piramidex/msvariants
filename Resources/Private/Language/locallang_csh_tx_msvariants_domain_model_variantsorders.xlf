@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-04T22:28:54Z" product-name="msvariants">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-05-15T05:33:26Z" product-name="msvariants">
 		<header/>
 		<body>
 			<trans-unit id="order_id.description">
@@ -20,6 +20,9 @@
 			</trans-unit>
 			<trans-unit id="sku.description">
 				<source>sku</source>
+			</trans-unit>
+			<trans-unit id="order_product_id.description">
+				<source>orderProductId</source>
 			</trans-unit>
 		</body>
 	</file>

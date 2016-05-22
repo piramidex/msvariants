@@ -98,6 +98,7 @@ CREATE TABLE tx_msvariants_domain_model_variantsorders (
 	price double(11,2) DEFAULT '0.00' NOT NULL,
 	quantity int(11) DEFAULT '0' NOT NULL,
 	sku varchar(255) DEFAULT '' NOT NULL,
+	order_product_id int(11) DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

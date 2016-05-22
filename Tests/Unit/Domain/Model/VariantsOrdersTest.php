@@ -187,4 +187,27 @@ class VariantsOrdersTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getOrderProductIdReturnsInitialValueForInteger() {
+		$this->assertSame(
+			0,
+			$this->subject->getOrderProductId()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setOrderProductIdForIntegerSetsOrderProductId() {
+		$this->subject->setOrderProductId(12);
+
+		$this->assertAttributeEquals(
+			12,
+			'orderProductId',
+			$this->subject
+		);
+	}
 }

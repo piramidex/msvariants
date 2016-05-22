@@ -272,6 +272,16 @@
                             "propertyName": "sku",
                             "propertyType": "String",
                             "uid": "63013511920"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "orderProductId",
+                            "propertyType": "Integer",
+                            "uid": "1134314880387"
                         }
                     ]
                 },
@@ -431,7 +441,7 @@
     },
     "wires": [],
     "log": {
-        "last_modified": "2016-02-04 10:28",
+        "last_modified": "2016-05-15 05:33",
         "extension_builder_version": "6.2.0",
         "be_user": " (1)"
     }

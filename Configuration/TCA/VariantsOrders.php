@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $GLOBALS['TCA']['tx_msvariants_domain_model_variantsorders'] = array(
 	'ctrl' => $GLOBALS['TCA']['tx_msvariants_domain_model_variantsorders']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, order_id, product_id, variant_id, price, quantity, sku',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, order_id, product_id, variant_id, price, quantity, sku, order_product_id',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, order_id, product_id, variant_id, price, quantity, sku, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, order_id, product_id, variant_id, price, quantity, sku, order_product_id, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -150,6 +150,15 @@ $GLOBALS['TCA']['tx_msvariants_domain_model_variantsorders'] = array(
 				'size' => 30,
 				'eval' => 'trim'
 			),
+		),
+		'order_product_id' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variantsorders.order_product_id',
+			'config' => array(
+				'type' => 'input',
+				'size' => 4,
+				'eval' => 'int'
+			)
 		),
 		
 	),
