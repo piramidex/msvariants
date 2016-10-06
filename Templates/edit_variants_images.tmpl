@@ -1,0 +1,62 @@
+<!-- ###TEMPLATE### begin -->
+<div style="display: block;" id="product_variants_images" class="tab_content">
+
+			<input name="options_form" type="hidden" value="1">
+
+			<h1>###LABEL_HEADING_TAB_VARIANTS_IMAGES###</h1>
+
+			<table width="100%" cellpadding="2" cellspacing="2" id="product_variants_images_table">
+				<tbody>
+
+					<tr id="product_variants_images_content_row">
+						<td colspan="5">
+							<ul id="products_variants_images_items" class="ui-sortable">
+
+								<!-- ###ITEM_VARIANT_IMAGES### begin -->
+								<li id="products_variants_images_item_###VARIANT_IMAGES_ITEM_ID###" alt="###VARIANT_IMAGES_ITEM_ALT###" class="products_variants_images_item odd_group_row" style="">
+									<span class="option_name" style="background-color:grey; color:white;">###LABEL_VARIANT_NAME###<a href="#" class="items_wrapper_unfolded">fold</a></span>
+									<!--- <div class="items_wrapper ui-sortable" style="display: block;"> --->
+
+											<!-- ###ITEM_OPTION### begin -->
+									          <div>
+													<label>###OPTION_NAME###</label>
+													<label>###OPTION_VALUE###</label>
+									          </div>
+											<!-- ###ITEM_OPTION### end -->
+
+									          <div>
+									            <label>###LABEL_SKU###</label>
+									            <label>###SKU###</label>
+									          </div>
+
+									          <div>
+									          	###IMAGE_CODE###
+									          </div>
+
+									<input type="hidden" name="variants_ids[]" id="variants_ids[]" value="###VARIANT_ID###">
+						    </li>
+						    <!-- ###ITEM_VARIANT_IMAGES### end -->
+
+			</ul>
+		</td></tr>
+
+			<tr id="add_attributes_holder">
+				<td colspan="5">&nbsp;</td>
+			</tr>
+
+			<tr id="add_attributes_button">
+					<td colspan="5" align="right"><input id="addAttributes" type="button" class="msadmin_button" value="Add new attributes [+]"></td>
+			</tr>
+
+			</tbody></table>
+			<script>
+			$(document).on("keyup", ".msAttributesPriceExcludingVat", function() {
+				productPrice(true, $(this));
+			});
+			$(document).on("keyup", ".msAttributesPriceIncludingVat", function() {
+				productPrice(false, $(this));
+			});
+			</script>
+
+</div>
+<!-- ###TEMPLATE### end -->

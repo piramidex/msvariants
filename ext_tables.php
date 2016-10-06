@@ -127,3 +127,4 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvari
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvariants').'/Classes/Hooks/class.tx_msvariants_updatecartproductprehook.php');
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvariants').'/Classes/Hooks/class.tx_msvariants_insertordersproductpreproc.php');
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvariants').'/Classes/Hooks/class.tx_msvariants_editorderlistitemprehook.php');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('msvariants').'/Classes/Hooks/class.tx_msvariants_customajaxpage.php');
