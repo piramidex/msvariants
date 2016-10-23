@@ -72,6 +72,46 @@ class Variants extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $variantSku = '';
 
 	/**
+	 * image1
+	 *
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $image1 = '';
+
+	/**
+	 * image2
+	 *
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $image2 = '';
+
+	/**
+	 * image3
+	 *
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $image3 = '';
+
+	/**
+	 * image4
+	 *
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $image4 = '';
+
+	/**
+	 * image5
+	 *
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $image5 = '';
+
+	/**
 	 * Returns the productId
 	 *
 	 * @return integer $productId
@@ -184,6 +224,101 @@ class Variants extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setVariantId($variantId) {
 		$this->variantId = $variantId;
+	}
+
+	/**
+	 * Returns the image1
+	 *
+	 * @return string $image1
+	 */
+	public function getImage1() {
+		return $this->image1;
+	}
+
+	/**
+	 * Sets the image1
+	 *
+	 * @param string $image1
+	 * @return void
+	 */
+	public function setImage1($image1) {
+		$this->image1 = $image1;
+	}
+
+	/**
+	 * Returns the image2
+	 *
+	 * @return string $image2
+	 */
+	public function getImage2() {
+		return $this->image2;
+	}
+
+	/**
+	 * Sets the image2
+	 *
+	 * @param string $image2
+	 * @return void
+	 */
+	public function setImage2($image2) {
+		$this->image2 = $image2;
+	}
+
+	/**
+	 * Returns the image3
+	 *
+	 * @return string $image3
+	 */
+	public function getImage3() {
+		return $this->image3;
+	}
+
+	/**
+	 * Sets the image3
+	 *
+	 * @param string $image3
+	 * @return void
+	 */
+	public function setImage3($image3) {
+		$this->image3 = $image3;
+	}
+
+	/**
+	 * Returns the image4
+	 *
+	 * @return string $image4
+	 */
+	public function getImage4() {
+		return $this->image4;
+	}
+
+	/**
+	 * Sets the image4
+	 *
+	 * @param string $image4
+	 * @return void
+	 */
+	public function setImage4($image4) {
+		$this->image4 = $image4;
+	}
+
+	/**
+	 * Returns the image5
+	 *
+	 * @return string $image5
+	 */
+	public function getImage5() {
+		return $this->image5;
+	}
+
+	/**
+	 * Sets the image5
+	 *
+	 * @param string $image5
+	 * @return void
+	 */
+	public function setImage5($image5) {
+		$this->image5 = $image5;
 	}
 
 }

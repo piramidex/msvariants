@@ -164,4 +164,119 @@ class VariantsTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getImage1ReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getImage1()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImage1ForStringSetsImage1() {
+		$this->subject->setImage1('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'image1',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImage2ReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getImage2()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImage2ForStringSetsImage2() {
+		$this->subject->setImage2('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'image2',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImage3ReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getImage3()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImage3ForStringSetsImage3() {
+		$this->subject->setImage3('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'image3',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImage4ReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getImage4()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImage4ForStringSetsImage4() {
+		$this->subject->setImage4('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'image4',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImage5ReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getImage5()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImage5ForStringSetsImage5() {
+		$this->subject->setImage5('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'image5',
+			$this->subject
+		);
+	}
 }

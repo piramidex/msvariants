@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-05-15T05:33:26Z" product-name="msvariants">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-10-06T03:59:59Z" product-name="msvariants">
 		<header/>
 		<body>
 			<trans-unit id="variant_id.description">
@@ -17,6 +17,21 @@
 			</trans-unit>
 			<trans-unit id="variant_sku.description">
 				<source>variantSku</source>
+			</trans-unit>
+			<trans-unit id="image1.description">
+				<source>image1</source>
+			</trans-unit>
+			<trans-unit id="image2.description">
+				<source>image2</source>
+			</trans-unit>
+			<trans-unit id="image3.description">
+				<source>image3</source>
+			</trans-unit>
+			<trans-unit id="image4.description">
+				<source>image4</source>
+			</trans-unit>
+			<trans-unit id="image5.description">
+				<source>image5</source>
 			</trans-unit>
 		</body>
 	</file>

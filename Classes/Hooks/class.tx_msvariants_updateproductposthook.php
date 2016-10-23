@@ -25,14 +25,23 @@ class tx_msvariants_updateproductposthook {
         'variant_id' => $variants_ids[$i],
         'variant_price' => $variants_prices[$i],
         'variant_stock' => $variants_stocks[$i],
-        'variant_sku' => $variants_skus[$i],
+        'variant_sku' => $variants_skus[$i]
       );
+
+      for($j = 1; $j <= 5; $j++) {
+        if ($reference->post['ajax_variants_image_'.$variants_ids[$i].'_'.$j]) {
+          $update_array['image'.$j] = $reference->post['ajax_variants_image_'.$variants_ids[$i].'_'.$j];
+        }
+      }
+
       $res = $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
         'tx_msvariants_domain_model_variants',
         'variant_id='.$variants_ids[$i], // TODO make this secure with fullQuoteStr
         $update_array
       );
     }
+
+    //error_log("ajax variants images".print_R($reference->post['ajax_variants_image']))
 
 
     // Case 2: variants have changed

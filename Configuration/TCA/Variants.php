@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $GLOBALS['TCA']['tx_msvariants_domain_model_variants'] = array(
 	'ctrl' => $GLOBALS['TCA']['tx_msvariants_domain_model_variants']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, variant_id, product_id, variant_price, variant_stock, variant_sku',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, variant_id, product_id, variant_price, variant_stock, variant_sku, image1, image2, image3, image4, image5',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, variant_id, product_id, variant_price, variant_stock, variant_sku, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, variant_id, product_id, variant_price, variant_stock, variant_sku, image1, image2, image3, image4, image5, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -136,6 +136,51 @@ $GLOBALS['TCA']['tx_msvariants_domain_model_variants'] = array(
 		'variant_sku' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.variant_sku',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required'
+			),
+		),
+		'image1' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.image1',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required'
+			),
+		),
+		'image2' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.image2',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required'
+			),
+		),
+		'image3' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.image3',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required'
+			),
+		),
+		'image4' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.image4',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required'
+			),
+		),
+		'image5' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:msvariants/Resources/Private/Language/locallang_db.xlf:tx_msvariants_domain_model_variants.image5',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,

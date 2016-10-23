@@ -28,7 +28,7 @@ $GLOBALS['TCA']['tx_msvariants_domain_model_variants'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'variant_id,product_id,variant_price,variant_stock,variant_sku,',
+		'searchFields' => 'variant_id,product_id,variant_price,variant_stock,variant_sku,image1,image2,image3,image4,image5,',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Variants.php',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_msvariants_domain_model_variants.gif'
 	),

@@ -3,8 +3,8 @@
         {
             "config": {
                 "position": [
-                    49,
-                    49
+                    23,
+                    63
                 ]
             },
             "name": "New Model Object",
@@ -82,6 +82,56 @@
                             "propertyName": "variantSku",
                             "propertyType": "String",
                             "uid": "528153463754"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "image1",
+                            "propertyType": "String",
+                            "uid": "18253391888"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "image2",
+                            "propertyType": "String",
+                            "uid": "1304711302193"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "image3",
+                            "propertyType": "String",
+                            "uid": "1129759997941"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "image4",
+                            "propertyType": "String",
+                            "uid": "36728891870"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "image5",
+                            "propertyType": "String",
+                            "uid": "69342886638"
                         }
                     ]
                 },
@@ -183,8 +233,8 @@
         {
             "config": {
                 "position": [
-                    25,
-                    237
+                    301,
+                    368
                 ]
             },
             "name": "New Model Object",
@@ -441,7 +491,7 @@
     },
     "wires": [],
     "log": {
-        "last_modified": "2016-05-15 05:33",
+        "last_modified": "2016-10-06 04:00",
         "extension_builder_version": "6.2.0",
         "be_user": " (1)"
     }

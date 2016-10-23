@@ -11,6 +11,11 @@ CREATE TABLE tx_msvariants_domain_model_variants (
 	variant_price double(11,2) DEFAULT '0.00' NOT NULL,
 	variant_stock int(11) DEFAULT '0' NOT NULL,
 	variant_sku varchar(255) DEFAULT '' NOT NULL,
+	image1 varchar(255) DEFAULT '' NOT NULL,
+	image2 varchar(255) DEFAULT '' NOT NULL,
+	image3 varchar(255) DEFAULT '' NOT NULL,
+	image4 varchar(255) DEFAULT '' NOT NULL,
+	image5 varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

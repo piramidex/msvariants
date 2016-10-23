@@ -4,6 +4,24 @@ class tx_msvariants_admineditproductpreproc {
 
   function adminEditProductPreProc(&$params, &$reference) {
 
+
+    // TODO: this config should go somewhere else
+    $this->msvariants['image_paths']['variants']['dir_images'] = 'uploads/tx_msvariants/images';  
+    $this->msvariants['image_paths']['variants']['dir_variants'] = 'uploads/tx_msvariants/images/variants';  
+    $this->msvariants['image_paths']['variants']['original'] = 'uploads/tx_msvariants/images/variants/original';  
+    $this->msvariants['image_paths']['variants']['normal'] = 'uploads/tx_msvariants/images/variants/normal';  
+    $this->msvariants['image_paths']['variants']['50'] = 'uploads/tx_msvariants/images/variants/50';  
+    $this->msvariants['image_paths']['variants']['100'] = 'uploads/tx_msvariants/images/variants/100';  
+    $this->msvariants['image_paths']['variants']['200'] = 'uploads/tx_msvariants/images/variants/200';  
+    $this->msvariants['image_paths']['variants']['300'] = 'uploads/tx_msvariants/images/variants/300';  
+    foreach($this->msvariants['image_paths']['variants'] as $path) {
+      error_log('path: '.$ref->DOCUMENT_ROOT.$path);
+      if (!is_dir($ref->DOCUMENT_ROOT.$path)) {
+        t3lib_div::mkdir($ref->DOCUMENT_ROOT.$path);
+      }
+    }
+
+
     //----------------------------------------
     // VARIANTS TAB
     //----------------------------------------
@@ -142,7 +160,7 @@ class tx_msvariants_admineditproductpreproc {
 
 
     // Get variants from db
-    $sql_pa=$GLOBALS ['TYPO3_DB']->SELECTquery('vars.variant_id, vars.product_id, vars.variant_price, vars.variant_stock, vars.variant_sku, vattrs.attribute_id, vattrs.option_id, vattrs.option_value_id', // SELECT ...
+    $sql_pa=$GLOBALS ['TYPO3_DB']->SELECTquery('vars.variant_id, vars.product_id, vars.variant_price, vars.variant_stock, vars.variant_sku, vars.image1, vars.image2, vars.image3, vars.image4, vars.image5, vattrs.attribute_id, vattrs.option_id, vattrs.option_value_id', // SELECT ...
       'tx_msvariants_domain_model_variants vars, tx_msvariants_domain_model_variantsattributes vattrs', // FROM ...
       "vars.product_id='".$product['products_id']."' and vars.variant_id=vattrs.variant_id", // WHERE.  // TODO should we take into consideration the language popt.language_id = 0?
       '', // GROUP BY...
@@ -169,6 +187,11 @@ class tx_msvariants_admineditproductpreproc {
               'variant_price' => $row['variant_price'],
               'variant_stock' => $row['variant_stock'],
               'variant_sku' => $row['variant_sku'],
+              'image1' => $row['image1'],
+              'image2' => $row['image2'],
+              'image3' => $row['image3'],
+              'image4' => $row['image4'],
+              'image5' => $row['image5']
             );
           }
 
@@ -210,22 +233,27 @@ class tx_msvariants_admineditproductpreproc {
 
           $images_tab_block='';
           for ($x=0; $x<$reference->ms['MODULES']['NUMBER_OF_PRODUCT_IMAGES']; $x++) {
-            $i=$x;
-            if ($i==0) {
-              $i='';
-            }
+//            $i=$x;
+//            if ($i==0) {
+//              $i='';
+//            }
+            $i = $x+1;
             $images_tab_block.='
             <div class="account-field" id="msEditProductInputImage_'.$i.'">
-              <label for="variants_image_'.$nVariant.'_'.$i.'">'.$reference->pi_getLL('admin_image').' '.($i+1).'</label>
-              <div id="variants_image_'.$nVariant.'_'.$i.'">
+              <label for="variants_image_'.$variant['variant_id'].'_'.$i.'">'.$reference->pi_getLL('admin_image').' '.$i.'</label>
+              <div id="variants_image_'.$variant['variant_id'].'_'.$i.'">
                 <noscript>
-                  <input name="variants_image_'.$nVariant.'_'.$i.'" type="file" />
+                  <input name="variants_image_'.$variant['variant_id'].'_'.$i.'" type="file" />
                 </noscript>
               </div>
-              <input name="ajax_variants_image_'.$nVariant.'_'.$i.'" id="ajax_variants_image_'.$nVariant.'_'.$i.'" type="hidden" value="" />';
-              if ($_REQUEST['action']=='edit_product' and $product['variants_image_'.$nVariant.'_'.$i]) {
-                $images_tab_block.='<img src="'.mslib_befe::getImagePath($product['variants_image_'.$nVariant.'_'.$i], 'products', '50').'">';
-                $images_tab_block.=' <a href="'.mslib_fe::typolink(',2002', '&tx_multishop_pi1[page_section]=admin_ajax&cid='.$_REQUEST['cid'].'&pid='.$_REQUEST['pid'].'&action=edit_product&delete_image=variants_image_'.$nVariant.'_'.$i).'" onclick="return confirm(\'Are you sure?\')"><img src="'.$reference->FULL_HTTP_URL_MS.'templates/images/icons/delete2.png" border="0" alt="'.$reference->pi_getLL('admin_delete_image').'"></a>';
+              <input name="ajax_variants_image_'.$variant['variant_id'].'_'.$i.'" id="ajax_variants_image_'.$variant['variant_id'].'_'.$i.'" type="hidden" value="" />';
+              if ($_REQUEST['action']=='edit_product' and $variant['image'.$i]) {
+
+//                $images_tab_block.='<img src="'.$folder.mslib_befe::getImagePath($variant['image'.$i], 'products', '50').'">';
+                $filename = $variant['image'.$i];
+                $images_tab_block.='<img src="'.$this->msvariants['image_paths']['variants']['50'].'/'.mslib_befe::getImagePrefixFolder($filename).'/'.$filename.'">';
+
+                $images_tab_block.=' <a href="'.mslib_fe::typolink(',2002', '&tx_multishop_pi1[page_section]=admin_ajax&cid='.$_REQUEST['cid'].'&pid='.$_REQUEST['pid'].'&action=edit_product&delete_image=variants_image_'.$variant['variant_id'].'_'.$i).'" onclick="return confirm(\'Are you sure?\')"><img src="'.$reference->FULL_HTTP_URL_MS.'templates/images/icons/delete2.png" border="0" alt="'.$reference->pi_getLL('admin_delete_image').'"></a>';
               }
               $images_tab_block.='</div>';
             }
@@ -233,14 +261,15 @@ class tx_msvariants_admineditproductpreproc {
             $images_tab_block.='<script>
             jQuery(document).ready(function($) {';
             for ($x=0; $x<$reference->ms['MODULES']['NUMBER_OF_PRODUCT_IMAGES']; $x++) {
-              $i=$x;
-              if ($i==0) {
-                $i='';
-              }
+//              $i=$x;
+//              if ($i==0) {
+//                $i='';
+//              }
+                $i = $x+1;
                 $images_tab_block.='
                 var products_name=$("#products_name_0").val();
                 var uploader'.$i.' = new qq.FileUploader({
-                  element: document.getElementById(\'variants_image_'.$nVariant.'_'.$i.'\'),
+                  element: document.getElementById(\'variants_image_'.$variant['variant_id'].'_'.$i.'\'),
                   action: \''.mslib_fe::typolink(',2002', '&tx_multishop_pi1[page_section]=custom_page').'\',
                   params: {
                     products_name: products_name,
@@ -253,7 +282,7 @@ class tx_msvariants_admineditproductpreproc {
                   \'</div>\',
                   onComplete: function(id, fileName, responseJSON){
                     var filenameServer = responseJSON[\'filename\'];
-                    $("#ajax_variants_image_'.$nVariant.'_'.$i.'").val(filenameServer);
+                    $("#ajax_variants_image_'.$variant['variant_id'].'_'.$i.'").val(filenameServer);
                   },
                   debug: false
                 });';
@@ -262,10 +291,11 @@ class tx_msvariants_admineditproductpreproc {
               $(\'#products_name_0\').change(function() {
                 var products_name=$("#products_name_0").val();';
                 for ($x=0; $x<$reference->ms['MODULES']['NUMBER_OF_PRODUCT_IMAGES']; $x++) {
-                  $i=$x;
-                  if ($i==0) {
-                    $i='';
-                  }
+//                  $i=$x;
+//                  if ($i==0) {
+//                    $i='';
+//                  }
+                  $i = $x+1;
                   $images_tab_block.='
                   uploader'.$i.'.setParams({
                    products_name: products_name,
