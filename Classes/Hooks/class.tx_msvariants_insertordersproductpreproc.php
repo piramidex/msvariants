@@ -48,6 +48,11 @@ class tx_msvariants_insertordersproductpreproc {
       'sku' => $variant_data['variant_sku']
     );
 
+    // TODO should we insert here the following logic:
+    // - check if after the order the variants gets out of stock
+    // - if such is the case, notify adming about this event
+    // - and disable product variant! (ohh... that's new - we should do this in product detail script)
+
     $res = $GLOBALS['TYPO3_DB']->exec_INSERTquery(
       'tx_msvariants_domain_model_variantsorders', $insert_array
     );

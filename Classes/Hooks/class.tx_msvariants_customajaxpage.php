@@ -31,6 +31,7 @@
             if (isset($_SERVER["CONTENT_LENGTH"])) {
 
 
+              if ($ref->get['file_type'] == 'variants_image') {
       //        switch ($ref->get['file_type']) {
       //          case 'variants_image':
       //          for ($x=0; $x<$ref->ms['MODULES']['NUMBER_OF_PRODUCT_IMAGES']; $x++) {
@@ -120,16 +121,18 @@
                   }
                 }
               }
+
             }
+          }
       //          }
       //          break;
       //        }
       //      }
-          }
+        }
       //    exit();
       //    break;
 
-        }
+      }
 
         public function resizeProductImage($original_path, $filename, $module_path, $run_in_background=0, $ref) {
 
