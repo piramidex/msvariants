@@ -5,6 +5,8 @@
 
 			<h1>###LABEL_HEADING_TAB_VARIANTS###</h1>
 
+			<input type="button" id="gen_variants" value="gen_variants" onclick="doGenVariants();">
+
 			<table width="100%" cellpadding="2" cellspacing="2" id="product_variants_table">
 				<tbody>
 
@@ -58,6 +60,124 @@
 				productPrice(false, $(this));
 			});
 			</script>
+
+			<script>
+
+var template = 
+	'<li>' +
+	'  <span>VARIANT_NAME</span>' +
+	'  <div>' +
+	'    <label>Price</label>' +
+	'    <input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="0.00">' +
+	'  </div>' +
+	'  <div>' +
+	'    <label>Stock</label>' +
+	'    <input type="text" name="variants_stocks[]" class="variants_stock" id="variants_stocks[]" value="0">' +
+	'  </div>' +
+	'  <div>' +
+	'    <label>SKU</label>' +
+	'    <input type="text" class="text" name="variants_skus[]" id="variants_skus[]" maxlength="13" value="">' +
+	'  </div>' +
+	'  <input type="hidden" name="variants_ids[]" id="variants_ids[]" value="VARIANT_ID">' +
+	'</li>';
+
+// $(document).ready(function() {
+// 	var html = genVariantsHtml();
+// 	$("ul#variants").html(html);
+// });
+
+function doGenVariants() {
+	var html = genVariantsHtml();
+	$("ul#products_variants_items").html(html);
+	disableAddNewValueButton();
+}
+
+function genVariantsHtml() {
+	var html = '';
+	var variants = genVariants();
+	for(var i = 0; i < variants.length; i++) {
+		var v = variants[i];
+		html += genHtmlForVariant(v, i+1);
+	}
+	return html;
+}
+
+function genVariants() {
+	var variants = [];
+	attributes = buildAttributes();
+	$("div#variants").html(attributes);
+	console.log(attributes);
+	console.log(Object.keys(attributes).length);
+	order = [ "Color", "Talla" ];
+	count(attributes, order, [], variants);
+	console.log(variants);
+	return variants;
+}
+
+function count(counter, indexes, res, combinations) {
+	console.log("param indexes: " + indexes);
+	console.log("param res: " + res);
+	if (indexes.length >= 1) {
+		var index = indexes[0];
+		var digits = getDigits(counter, index);
+		console.log("index: " + index);
+		console.log("digits: " + digits);
+		console.log("num digits: " + digits.length);
+		for(var i = 0; i < digits.length; i++) {
+			var d = digits[i];
+			console.log("digit: " + d);
+			var elem = { option: index, value: d };
+			var next_res = res.slice();
+			next_res.push(elem);
+			var next_indexes = indexes.slice();
+			next_indexes.splice(0, 1);
+			count(counter, next_indexes, next_res, combinations);
+		}
+	}
+	else {
+		console.log("combination finished:");
+		console.log(res);
+		combinations.push(res);
+	}
+}
+
+function getDigits(counter, index) {
+	return counter[index];
+}
+
+function buildAttributes() {
+	var attributes = {};
+	var options = $("input[name*=\"tx_multishop_pi1[options][]\"]");
+	var values = $("input[name*=\"tx_multishop_pi1[attributes][]\"]");
+	for(i = 0; i < options.length; i++) {
+		if (!attributes.hasOwnProperty(options.eq(i).parent().find("span.select2-chosen").html())) {
+			attributes[options.eq(i).parent().find("span.select2-chosen").html()] = [];
+		}
+		attributes[options.eq(i).parent().find("span.select2-chosen").html()].push(values.eq(i).parent().find("span.select2-chosen").html());
+	}
+	return attributes;
+}
+
+function genHtmlForVariant(variant, variantID) {
+	var html = '';
+	var variantName = '';
+	for(var i = 0; i < variant.length; i++) {
+		var attr = variant[i];
+		variantName += attr.option + ':' + attr.value + '-';
+	}
+	html += template.replace("VARIANT_NAME", variantName).replace("VARIANT_ID", "new"+variantID);
+	return html;
+}
+
+function disableAddNewValueButton() {
+	$("div.add_new_attributes").remove();
+	$("tr#add_attributes_button").remove();
+	$("input.delete_product_attributes").remove();
+}
+
+
+</script>
+
 
 </div>
 <!-- ###TEMPLATE### end -->

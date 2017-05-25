@@ -125,10 +125,14 @@ class tx_msvariants_admineditproductpreproc {
 
         $content = $reference->cObj->substituteMarkerArray($subparts['template'], $markerArray, '###|###');
         $content = $reference->cObj->substituteSubpart($content, 'ITEM_VARIANT', $content_variants);
-
-
       }
     }
+      else {
+        $markerArray = array();
+        $markerArray['LABEL_HEADING_TAB_VARIANTS'] = 'VARIANTS';
+        $content = $reference->cObj->substituteMarkerArray($subparts['template'], $markerArray, '###|###');
+        $content = $reference->cObj->substituteSubpart($content, 'ITEM_VARIANT', '');
+      }
 
 
     $params['plugins_extra_tab']['tabs_header'][] = '<li><a href="#product_variants">VARIANTS</a></li>';
