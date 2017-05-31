@@ -78,6 +78,7 @@ var template =
 	'    <label>SKU</label>' +
 	'    <input type="text" class="text" name="variants_skus[]" id="variants_skus[]" maxlength="13" value="">' +
 	'  </div>' +
+	'  <input type="hidden" name="combinations[]" id="combinations[]" value="COMBINATIONS">' +
 	'  <input type="hidden" name="variants_ids[]" id="variants_ids[]" value="VARIANT_ID">' +
 	'</li>';
 
@@ -126,7 +127,12 @@ function count(counter, indexes, res, combinations) {
 		for(var i = 0; i < digits.length; i++) {
 			var d = digits[i];
 			console.log("digit: " + d);
-			var elem = { option: index, value: d };
+			var elem =
+				{
+					option: index,
+					option_id: counter[index].option_id,
+					value: d
+				};
 			var next_res = res.slice();
 			next_res.push(elem);
 			var next_indexes = indexes.slice();
@@ -142,7 +148,7 @@ function count(counter, indexes, res, combinations) {
 }
 
 function getDigits(counter, index) {
-	return counter[index];
+	return counter[index].option_values;
 }
 
 function buildAttributes() {
@@ -150,10 +156,19 @@ function buildAttributes() {
 	var options = $("input[name*=\"tx_multishop_pi1[options][]\"]");
 	var values = $("input[name*=\"tx_multishop_pi1[attributes][]\"]");
 	for(i = 0; i < options.length; i++) {
-		if (!attributes.hasOwnProperty(options.eq(i).parent().find("span.select2-chosen").html())) {
-			attributes[options.eq(i).parent().find("span.select2-chosen").html()] = [];
+		var option_name = options.eq(i).parent().find("span.select2-chosen").html();
+		if (!attributes.hasOwnProperty(option_name)) {
+			attributes[option_name] = 
+				{
+					option_id: options.eq(i).attr("value"),
+					option_values: []
+				};
 		}
-		attributes[options.eq(i).parent().find("span.select2-chosen").html()].push(values.eq(i).parent().find("span.select2-chosen").html());
+		attributes[option_name].option_values.push(
+			{
+				option_value_name: values.eq(i).parent().find("span.select2-chosen").html(),
+				option_value_id : values.eq(i).attr("value")
+			});
 	}
 	return attributes;
 }
@@ -161,11 +176,17 @@ function buildAttributes() {
 function genHtmlForVariant(variant, variantID) {
 	var html = '';
 	var variantName = '';
+	var combinations = '';
 	for(var i = 0; i < variant.length; i++) {
 		var attr = variant[i];
-		variantName += attr.option + ':' + attr.value + '-';
+		variantName += attr.option + ':' + attr.value.option_value_name + '-';
+		combinations += attr.option_id + '|' + attr.value.option_value_id + (i < variant.length-1 ? '||' : '');
 	}
-	html += template.replace("VARIANT_NAME", variantName).replace("VARIANT_ID", "new"+variantID);
+	html +=
+		template
+		.replace("VARIANT_NAME", variantName)
+		.replace("VARIANT_ID", "new"+variantID)
+		.replace("COMBINATIONS", combinations);
 	return html;
 }
 
