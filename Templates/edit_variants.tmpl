@@ -194,6 +194,9 @@ function disableAddNewValueButton() {
 	$("div.add_new_attributes").remove();
 	$("tr#add_attributes_button").remove();
 	$("input.delete_product_attributes").remove();
+	$("div.select2-container").each(function(index) {
+		$(this).html("<span>" + $(this).find("span.select2-chosen").html() + "</span>");
+	});
 }
 
 
