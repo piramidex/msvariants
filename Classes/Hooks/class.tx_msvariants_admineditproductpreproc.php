@@ -33,16 +33,17 @@ class tx_msvariants_admineditproductpreproc {
 
     // Get HTML template file
     if ($reference->conf['edit_variants_tmpl_path']) {
-    	$template=$reference->cObj->fileResource($reference->conf['edit_variants_tmpl_path']);
-    } else {
-    	$template=$reference->cObj->fileResource(t3lib_extMgm::siteRelPath('msvariants').'Templates/edit_variants.tmpl');
-    }
+     $template=$reference->cObj->fileResource($reference->conf['edit_variants_tmpl_path']);
+   } 
+   else {
+     $template=$reference->cObj->fileResource(t3lib_extMgm::siteRelPath('msvariants').'Templates/edit_variants.tmpl');
+   }
 
     // Extract the subparts from the template
-    $subparts=array();
-    $subparts['template']=$reference->cObj->getSubpart($template, '###TEMPLATE###');
-    $subparts['item_variant']=$reference->cObj->getSubpart($subparts['template'], '###ITEM_VARIANT###');
-    $subparts['item_option']=$reference->cObj->getSubpart($subparts['template'], '###ITEM_OPTION###');
+   $subparts=array();
+   $subparts['template']=$reference->cObj->getSubpart($template, '###TEMPLATE###');
+   $subparts['item_variant']=$reference->cObj->getSubpart($subparts['template'], '###ITEM_VARIANT###');
+   $subparts['item_option']=$reference->cObj->getSubpart($subparts['template'], '###ITEM_OPTION###');
 
 
     // Get variants from db
@@ -52,7 +53,7 @@ class tx_msvariants_admineditproductpreproc {
       '', // GROUP BY...
       '', // ORDER BY...
       '' // LIMIT ...
-    );
+      );
 
     $qry_pa=$GLOBALS ['TYPO3_DB']->sql_query($sql_pa);
 
@@ -74,7 +75,7 @@ class tx_msvariants_admineditproductpreproc {
               'variant_price' => $row['variant_price'],
               'variant_stock' => $row['variant_stock'],
               'variant_sku' => $row['variant_sku'],
-            );
+              );
           }
 
           $row['option_name'] = mslib_fe::getRealNameOptions($row['option_id']);
@@ -86,7 +87,7 @@ class tx_msvariants_admineditproductpreproc {
             // Generate HTML for variants
         foreach($variants_data as $variant) {
 
-          $variant_name = 'Variant: ';
+          $variant_name = '';
 
               // generate HTML for variant's attributes
           $content_options = '';
@@ -103,9 +104,6 @@ class tx_msvariants_admineditproductpreproc {
               // generate HTML for variant details
           $markerArray = array();
           $markerArray['LABEL_VARIANT_NAME'] = $variant_name;
-          $markerArray['LABEL_PRICE'] = 'Price';
-          $markerArray['LABEL_STOCK'] = 'Stock';
-          $markerArray['LABEL_SKU'] = 'SKU';
           $markerArray['VARIANT_ID'] = $variant['variant_id'];
           $markerArray['PRICE'] = $variant['variant_price'];
           $markerArray['STOCK'] = $variant['variant_stock'];
@@ -122,6 +120,9 @@ class tx_msvariants_admineditproductpreproc {
             // Generate HTML for variants tab block
         $markerArray = array();
         $markerArray['LABEL_HEADING_TAB_VARIANTS'] = 'VARIANTS';
+          $markerArray['LABEL_PRICE'] = 'Price';
+          $markerArray['LABEL_STOCK'] = 'Stock';
+          $markerArray['LABEL_SKU'] = 'SKU';
 
         $content = $reference->cObj->substituteMarkerArray($subparts['template'], $markerArray, '###|###');
         $content = $reference->cObj->substituteSubpart($content, 'ITEM_VARIANT', $content_variants);
@@ -129,17 +130,25 @@ class tx_msvariants_admineditproductpreproc {
       else {
         $markerArray = array();
         $markerArray['LABEL_HEADING_TAB_VARIANTS'] = 'VARIANTS';
+                  $markerArray['LABEL_PRICE'] = 'Price';
+          $markerArray['LABEL_STOCK'] = 'Stock';
+          $markerArray['LABEL_SKU'] = 'SKU';
+
         $content = $reference->cObj->substituteMarkerArray($subparts['template'], $markerArray, '###|###');
         $content = $reference->cObj->substituteSubpart($content, 'ITEM_VARIANT', '');
       }
-      
+
     }
-      else {
-        $markerArray = array();
-        $markerArray['LABEL_HEADING_TAB_VARIANTS'] = 'VARIANTS';
-        $content = $reference->cObj->substituteMarkerArray($subparts['template'], $markerArray, '###|###');
-        $content = $reference->cObj->substituteSubpart($content, 'ITEM_VARIANT', '');
-      }
+    else {
+      $markerArray = array();
+      $markerArray['LABEL_HEADING_TAB_VARIANTS'] = 'VARIANTS';
+                $markerArray['LABEL_PRICE'] = 'Price';
+          $markerArray['LABEL_STOCK'] = 'Stock';
+          $markerArray['LABEL_SKU'] = 'SKU';
+
+      $content = $reference->cObj->substituteMarkerArray($subparts['template'], $markerArray, '###|###');
+      $content = $reference->cObj->substituteSubpart($content, 'ITEM_VARIANT', '');
+    }
 
 
     $params['plugins_extra_tab']['tabs_header'][] = '<li><a href="#product_variants">VARIANTS</a></li>';
@@ -159,7 +168,8 @@ class tx_msvariants_admineditproductpreproc {
     // Get HTML template file
     if ($reference->conf['edit_variants_images_tmpl_path']) {
       $template=$reference->cObj->fileResource($reference->conf['edit_variants_images_tmpl_path']);
-    } else {
+    }
+    else {
       $template=$reference->cObj->fileResource(t3lib_extMgm::siteRelPath('msvariants').'Templates/edit_variants_images.tmpl');
     }
 
@@ -177,7 +187,7 @@ class tx_msvariants_admineditproductpreproc {
       '', // GROUP BY...
       '', // ORDER BY...
       '' // LIMIT ...
-    );
+      );
 
     $qry_pa=$GLOBALS ['TYPO3_DB']->sql_query($sql_pa);
 
@@ -203,7 +213,7 @@ class tx_msvariants_admineditproductpreproc {
               'image3' => $row['image3'],
               'image4' => $row['image4'],
               'image5' => $row['image5']
-            );
+              );
           }
 
           $row['option_name'] = mslib_fe::getRealNameOptions($row['option_id']);
@@ -276,79 +286,79 @@ class tx_msvariants_admineditproductpreproc {
 //              if ($i==0) {
 //                $i='';
 //              }
-                $i = $x+1;
-                $images_tab_block.='
-                var products_name=$("#products_name_0").val();
-                var uploader'.$i.' = new qq.FileUploader({
-                  element: document.getElementById(\'variants_image_'.$variant['variant_id'].'_'.$i.'\'),
-                  action: \''.mslib_fe::typolink(',2002', '&tx_multishop_pi1[page_section]=custom_page').'\',
-                  params: {
-                    products_name: products_name,
-                    file_type: \'products_image'.$i.'\'
-                  },
-                  template: \'<div class="qq-uploader">\' +
-                  \'<div class="qq-upload-drop-area"><span>'.$reference->pi_getLL('admin_label_drop_files_here_to_upload').'</span></div>\' +
-                  \'<div class="qq-upload-button">'.addslashes(htmlspecialchars($reference->pi_getLL('choose_image'))).'</div>\' +
-                  \'<ul class="qq-upload-list"></ul>\' +
-                  \'</div>\',
-                  onComplete: function(id, fileName, responseJSON){
-                    var filenameServer = responseJSON[\'filename\'];
-                    $("#ajax_variants_image_'.$variant['variant_id'].'_'.$i.'").val(filenameServer);
-                  },
-                  debug: false
-                });';
-              }
+              $i = $x+1;
               $images_tab_block.='
-              $(\'#products_name_0\').change(function() {
-                var products_name=$("#products_name_0").val();';
-                for ($x=0; $x<$reference->ms['MODULES']['NUMBER_OF_PRODUCT_IMAGES']; $x++) {
+              var products_name=$("#products_name_0").val();
+              var uploader'.$i.' = new qq.FileUploader({
+                element: document.getElementById(\'variants_image_'.$variant['variant_id'].'_'.$i.'\'),
+                action: \''.mslib_fe::typolink(',2002', '&tx_multishop_pi1[page_section]=custom_page').'\',
+                params: {
+                  products_name: products_name,
+                  file_type: \'products_image'.$i.'\'
+                },
+                template: \'<div class="qq-uploader">\' +
+                \'<div class="qq-upload-drop-area"><span>'.$reference->pi_getLL('admin_label_drop_files_here_to_upload').'</span></div>\' +
+                \'<div class="qq-upload-button">'.addslashes(htmlspecialchars($reference->pi_getLL('choose_image'))).'</div>\' +
+                \'<ul class="qq-upload-list"></ul>\' +
+                \'</div>\',
+                onComplete: function(id, fileName, responseJSON){
+                  var filenameServer = responseJSON[\'filename\'];
+                  $("#ajax_variants_image_'.$variant['variant_id'].'_'.$i.'").val(filenameServer);
+                },
+                debug: false
+              });';
+            }
+            $images_tab_block.='
+            $(\'#products_name_0\').change(function() {
+              var products_name=$("#products_name_0").val();';
+              for ($x=0; $x<$reference->ms['MODULES']['NUMBER_OF_PRODUCT_IMAGES']; $x++) {
 //                  $i=$x;
 //                  if ($i==0) {
 //                    $i='';
 //                  }
-                  $i = $x+1;
-                  $images_tab_block.='
-                  uploader'.$i.'.setParams({
-                   products_name: products_name,
-                   file_type: \'products_image'.$i.'\'
-                 });';
-               }
+                $i = $x+1;
                 $images_tab_block.='
-              });
-            });
-          </script>';
+                uploader'.$i.'.setParams({
+                 products_name: products_name,
+                 file_type: \'products_image'.$i.'\'
+               });';
+             }
+             $images_tab_block.='
+           });
+         });
+       </script>';
 
-          $markerArray['IMAGE_CODE'] = $images_tab_block;
+       $markerArray['IMAGE_CODE'] = $images_tab_block;
 
 
-          $content_item_variant_images = $reference->cObj->substituteMarkerArray($subparts['item_variant_images'], $markerArray, '###|###');
-          $content_item_variant_images = $reference->cObj->substituteSubpart($content_item_variant_images, 'ITEM_OPTION', $content_options);
+       $content_item_variant_images = $reference->cObj->substituteMarkerArray($subparts['item_variant_images'], $markerArray, '###|###');
+       $content_item_variant_images = $reference->cObj->substituteSubpart($content_item_variant_images, 'ITEM_OPTION', $content_options);
 
-          $content_variants_images .= $content_item_variant_images;
-        }
+       $content_variants_images .= $content_item_variant_images;
+     }
 
 
             // Generate HTML for variants tab block
-        $markerArray = array();
-        $markerArray['LABEL_HEADING_TAB_VARIANTS_IMAGES'] = 'VARIANTS IMAGES';
+     $markerArray = array();
+     $markerArray['LABEL_HEADING_TAB_VARIANTS_IMAGES'] = 'VARIANTS IMAGES';
 
-        $content2 = $reference->cObj->substituteMarkerArray($subparts['template'], $markerArray, '###|###');
-        $content2 = $reference->cObj->substituteSubpart($content2, 'ITEM_VARIANT_IMAGES', $content_variants_images);
-
-
-      }
-    }
+     $content2 = $reference->cObj->substituteMarkerArray($subparts['template'], $markerArray, '###|###');
+     $content2 = $reference->cObj->substituteSubpart($content2, 'ITEM_VARIANT_IMAGES', $content_variants_images);
 
 
-    $params['plugins_extra_tab']['tabs_header'][] = '<li><a href="#product_variants_images">VARIANTS IMAGES</a></li>';
+   }
+ }
+
+
+ $params['plugins_extra_tab']['tabs_header'][] = '<li><a href="#product_variants_images">VARIANTS IMAGES</a></li>';
     //$params['plugins_extra_tab']['tabs_content'][] =
     //  '<div style="display:none;" id="product_variants" class="tab_content">'.$res.'</div';
-    $params['plugins_extra_tab']['tabs_content'][] = $content2;
+ $params['plugins_extra_tab']['tabs_content'][] = $content2;
 
 
 
 
-  }
+}
 
 
 }

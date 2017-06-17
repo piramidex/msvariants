@@ -10,38 +10,32 @@
 			<table width="100%" cellpadding="2" cellspacing="2" id="product_variants_table">
 				<tbody>
 
-					<tr id="product_variants_content_row">
-						<td colspan="5">
-							<ul id="products_variants_items" class="ui-sortable">
+					<tr id="variants_table_header">
+						<th><label>Variant</label></th>
+						<th><label>###LABEL_PRICE###</label></th>
+						<th><label>###LABEL_STOCK###</label></th>
+						<th><label>###LABEL_SKU###</label></th>
+					</tr>
 
 								<!-- ###ITEM_VARIANT### begin -->
-								<li id="products_variants_item_###VARIANT_ITEM_ID###" alt="###VARIANT_ITEM_ALT###" class="products_variants_item odd_group_row" style="">
-									<span class="option_name" style="background-color:grey; color:white;">###LABEL_VARIANT_NAME###<a href="#" class="items_wrapper_unfolded">fold</a></span>
-									<!--- <div class="items_wrapper ui-sortable" style="display: block;"> --->
+								<tr>
+									<td><label>###LABEL_VARIANT_NAME###</label></td>
 
-														<!-- ###ITEM_OPTION### begin -->
-									          <div>
-															<label>###OPTION_NAME###</label><label>###OPTION_VALUE###</label>
-									          </div>
-														<!-- ###ITEM_OPTION### end -->
+									          <td>
+									            <input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="###PRICE###">
+									          </td>
 
-									          <div>
-									            <label>###LABEL_PRICE###</label><input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="###PRICE###">
-									          </div>
+									          <td>
+									            <input type="text" name="variants_stocks[]" class="variants_stock" id="variants_stocks[]" value="###STOCK###">
+									          </td>
 
-									          <div>
-									            <label>###LABEL_STOCK###</label><input type="text" name="variants_stocks[]" class="variants_stock" id="variants_stocks[]" value="###STOCK###">
-									          </div>
-
-									          <div>
-									            <label>###LABEL_SKU###</label><input type="text" class="text" name="variants_skus[]" id="variants_skus[]" maxlength="13" value="###SKU###">
-									          </div>
+									          <td>
+									            <input type="text" class="text" name="variants_skus[]" id="variants_skus[]" maxlength="13" value="###SKU###">
+									          </td>
 									<input type="hidden" name="variants_ids[]" id="variants_ids[]" value="###VARIANT_ID###">
-						    </li>
+						    </tr>
 						    <!-- ###ITEM_VARIANT### end -->
 
-			</ul>
-		</td></tr>
 
 			<tr id="add_attributes_holder">
 				<td colspan="5">&nbsp;</td>
@@ -64,23 +58,20 @@
 			<script>
 
 var template = 
-	'<li>' +
-	'  <span>VARIANT_NAME</span>' +
-	'  <div>' +
-	'    <label>Price</label>' +
+	'<tr>' +
+	'  <td>VARIANT_NAME</td>' +
+	'  <td>' +
 	'    <input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="0.00">' +
-	'  </div>' +
-	'  <div>' +
-	'    <label>Stock</label>' +
+	'  </td>' +
+	'  <td>' +
 	'    <input type="text" name="variants_stocks[]" class="variants_stock" id="variants_stocks[]" value="0">' +
-	'  </div>' +
-	'  <div>' +
-	'    <label>SKU</label>' +
+	'  </td>' +
+	'  <td>' +
 	'    <input type="text" class="text" name="variants_skus[]" id="variants_skus[]" maxlength="13" value="">' +
-	'  </div>' +
+	'  </td>' +
 	'  <input type="hidden" name="combinations[]" id="combinations[]" value="COMBINATIONS">' +
 	'  <input type="hidden" name="variants_ids[]" id="variants_ids[]" value="VARIANT_ID">' +
-	'</li>';
+	'</tr>';
 
 // $(document).ready(function() {
 // 	var html = genVariantsHtml();
@@ -89,7 +80,7 @@ var template =
 
 function doGenVariants() {
 	var html = genVariantsHtml();
-	$("ul#products_variants_items").html(html);
+	$("tr#variants_table_header").after(html);
 	disableAddNewValueButton();
 }
 
