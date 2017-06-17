@@ -197,7 +197,18 @@ function disableAddNewValueButton() {
 	$("div.select2-container").each(function(index) {
 		$(this).html("<span>" + $(this).find("span.select2-chosen").html() + "</span>");
 	});
+	$("input#gen_variants").remove();
 }
+
+function isThereVariants() {
+	return $("input[name*=\"variants_ids[]\"]").length > 0;
+}
+
+$(document).ready(function() {
+	if (isThereVariants()) {
+		disableAddNewValueButton();
+	}
+});
 
 
 </script>
