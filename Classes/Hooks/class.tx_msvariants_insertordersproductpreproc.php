@@ -52,6 +52,7 @@ class tx_msvariants_insertordersproductpreproc {
     // - check if after the order the variants gets out of stock
     // - if such is the case, notify adming about this event
     // - and disable product variant! (ohh... that's new - we should do this in product detail script)
+    $this->updateQtyInVariant($variant_id, $cart_product_item['qty']);
 
     $res = $GLOBALS['TYPO3_DB']->exec_INSERTquery(
       'tx_msvariants_domain_model_variantsorders', $insert_array
@@ -93,6 +94,32 @@ class tx_msvariants_insertordersproductpreproc {
 
     error_log("insertOrdersProductPreProc - end");
 
+
+  }
+
+
+  private function updateQtyInVariant($variant_id, $ordered_qty) {
+
+    $qry =
+      "update tx_msvariants_domain_model_variants ".
+      "set variant_stock = (variant_stock - ".$ordered_qty.") where variant_id = ".$variant_id;
+
+    $res = $GLOBALS['TYPO3_DB']->sql_query($qry);
+
+    if ($res) {
+      $qry = "select variant_stock from tx_msvariants_domain_model_variants where variant_id = ".$variant_id;
+      $res = $GLOBALS['TYPO3_DB']->sql_query($qry);
+      $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+      if ($row['variant_stock'] < 0) {
+        // TODO send a warning email
+      }
+    }
+    else {
+      error_log(
+        "update variant's quantity with an ordered quantity failed".
+        " variant_id: ".$variant_id.
+        " qty: ".$ordered_qty);
+    }
 
   }
 
