@@ -12,7 +12,7 @@
 
 					<tr id="variants_table_header">
 						<th><label>Variant</label></th>
-						<th><label>###LABEL_PRICE###</label></th>
+						<th><label style="display:none;">###LABEL_PRICE###</label></th>
 						<th><label>###LABEL_STOCK###</label></th>
 						<th><label>###LABEL_SKU###</label></th>
 					</tr>
@@ -22,7 +22,7 @@
 									<td><label>###LABEL_VARIANT_NAME###</label></td>
 
 									          <td>
-									            <input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="###PRICE###">
+									            <input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="###PRICE###" style="display:none;">
 									          </td>
 
 									          <td>
@@ -61,7 +61,7 @@ var template =
 	'<tr>' +
 	'  <td>VARIANT_NAME</td>' +
 	'  <td>' +
-	'    <input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="0.00">' +
+	'    <input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="0.00" style="display:none;">' +
 	'  </td>' +
 	'  <td>' +
 	'    <input type="text" name="variants_stocks[]" class="variants_stock" id="variants_stocks[]" value="0">' +
