@@ -314,7 +314,7 @@ class tx_msvariants_admineditproductpreproc {
                 action: \''.mslib_fe::typolink(',2002', '&tx_multishop_pi1[page_section]=custom_page').'\',
                 params: {
                   products_name: products_name,
-                  file_type: \'products_image'.$i.'\'
+                  file_type: \'variants_image\'
                 },
                 template: \'<div class="qq-uploader">\' +
                 \'<div class="qq-upload-drop-area"><span>'.$reference->pi_getLL('admin_label_drop_files_here_to_upload').'</span></div>\' +
