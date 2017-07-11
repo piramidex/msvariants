@@ -224,6 +224,8 @@ class tx_msvariants_admineditproductpreproc {
 
             // Generate HTML for variants
         $nVariant = 0;
+        $currColor = '';
+        $newColor = false;
         foreach($variants_data as $variant) {
 
           $nVariant++;
@@ -234,20 +236,38 @@ class tx_msvariants_admineditproductpreproc {
           $markerArray = array();
           foreach($variants_attributes_data[$variant['variant_id']] as $variant_attribute) {
 
-            $markerArray['OPTION_NAME'] = $variant_attribute['option_name'];
-            $markerArray['OPTION_VALUE'] = $variant_attribute['option_value_name'];
+            if (strtoupper($variant_attribute['option_name']) == 'COLOR') {
+              if ($variant_attribute['option_value_name'] != $currColor) {
+                $currColor = $variant_attribute['option_value_name'];
+                $newColor = true;
+              }
+              else {
+                $newColor = false;
+              }
+            }
+
+            //$markerArray['OPTION_NAME'] = $variant_attribute['option_name'];
+            //$markerArray['OPTION_VALUE'] = $variant_attribute['option_value_name'];
+            $markerArray['OPTION_NAME'] = '';
+            $markerArray['OPTION_VALUE'] = '';
+
             $content_options .= $reference->cObj->substituteMarkerArray($subparts['item_option'], $markerArray, '###|###');
 
             $variant_name .= $variant_attribute['option_value_name']." - ";
+
           }
 
               // generate HTML for variant details
           $markerArray = array();
-          $markerArray['LABEL_VARIANT_NAME'] = $variant_name;
-          $markerArray['LABEL_SKU'] = 'SKU';
-          $markerArray['VARIANT_ID'] = $variant['variant_id'];
-          $markerArray['SKU'] = $variant['variant_sku'];
 
+          //$markerArray['LABEL_VARIANT_NAME'] = $variant_name;
+          //$markerArray['LABEL_SKU'] = 'SKU'
+          //$markerArray['SKU'] = $variant['variant_sku'];
+          $markerArray['LABEL_VARIANT_NAME'] = $newColor ? 'Color: '.$currColor : '';
+          $markerArray['LABEL_SKU'] = '';
+          $markerArray['SKU'] = '';
+
+          $markerArray['VARIANT_ID'] = $variant['variant_id'];
 
 
           // images tab
@@ -260,7 +280,7 @@ class tx_msvariants_admineditproductpreproc {
 //            }
             $i = $x+1;
             $images_tab_block.='
-            <div class="account-field" id="msEditProductInputImage_'.$i.'">
+            <div class="account-field" id="msEditProductInputImage_'.$i.'"'.(!$newColor ? 'style="display:none;"' : '').'>
               <label for="variants_image_'.$variant['variant_id'].'_'.$i.'">'.$reference->pi_getLL('admin_image').' '.$i.'</label>
               <div id="variants_image_'.$variant['variant_id'].'_'.$i.'">
                 <noscript>
