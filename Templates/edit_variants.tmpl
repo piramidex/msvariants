@@ -68,7 +68,11 @@ var template =
 	'    <input type="text" name="variants_prices[]" class="variants_price" id="variants_price[]" value="0.00" style="display:none;">' +
 	'  </td>' +
 	'  <td>' +
-	'    <input type="text" name="variants_stocks[]" class="variants_stock" id="variants_stocks[]" value="0">' +
+	'    <input type="text" name="variants_stocks[]" class="variants_stock" id="variants_stocks[]" value="0" style="display:none;">' +
+	'    <label class="switch">' +
+  	'	   <input type="checkbox" id="switch" onchange="switchInput(this);">' +
+  	'	   <span class="slider"></span>' +
+	'	 </label>' +
 	'  </td>' +
 	'  <td>' +
 	'    <input type="text" class="text" name="variants_skus[]" id="variants_skus[]" maxlength="13" value="">' +
